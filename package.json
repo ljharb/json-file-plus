@@ -4,6 +4,9 @@
 	"author": "Jordan Harband",
 	"description": "Read from and write to a JSON file, minimizing diffs and preserving formatting.",
 	"license": "MIT",
+	"scripts": {
+		"test": "node test/test.js"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/ljharb/node-json-file.git"
