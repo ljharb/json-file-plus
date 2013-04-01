@@ -1,5 +1,7 @@
 #json-file
 
+[![Build Status](https://travis-ci.org/ljharb/node-json-file.png)](https://travis-ci.org/ljharb/node-json-file)
+
 A module to read from and write to JSON files, without losing formatting, to minimize diffs.
 
 ## Example
