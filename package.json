@@ -20,9 +20,8 @@
 		"write"
 	],
 	"dependencies": {
-		"is-extended": "~0.0.4",
-		"node.extend": "~1.0.1",
-		"optimist": "~0.3.5"
+		"is-extended": "~0.0.5",
+		"node.extend": "~1.0.1"
 	},
 	"devDependencies": {
 		"tape": "~0.3.2"
