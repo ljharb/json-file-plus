@@ -1,4 +1,4 @@
-#json-file
+#json-file-plus <sup>[![Version Badge](http://vb.teelaun.ch/ljharb/node-json-file.svg)](https://npmjs.org/package/node-json-file)</sup>
 
 [![Build Status](https://travis-ci.org/ljharb/node-json-file.png)](https://travis-ci.org/ljharb/node-json-file)
 
