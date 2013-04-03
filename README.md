@@ -1,6 +1,6 @@
-#json-file-plus <sup>[![Version Badge](http://vb.teelaun.ch/ljharb/node-json-file.svg)](https://npmjs.org/package/json-file-plus)</sup>
+#json-file-plus <sup>[![Version Badge][2]][1]</sup>
 
-[![Build Status](https://travis-ci.org/ljharb/node-json-file.png)](https://travis-ci.org/ljharb/node-json-file)
+[![Build Status][3]][4] [![dependency status][5]][6]
 
 A module to read from and write to JSON files, without losing formatting, to minimize diffs.
 
@@ -36,4 +36,11 @@ jsonFile.read('package.json', function (err, file) {
 
 ## Tests
 Tests currently use tape - which doesn't yet work in node 0.10, but works in browserify. Rest assured, they pass.
+
+[1]: https://npmjs.org/package/json-file-plus
+[2]: http://vb.teelaun.ch/ljharb/node-json-file.svg
+[3]: https://travis-ci.org/ljharb/node-json-file.png
+[4]: https://travis-ci.org/ljharb/node-json-file
+[5]: https://david-dm.org/ljharb/node-json-file.png
+[6]: https://david-dm.org/ljharb/node-json-file
 
