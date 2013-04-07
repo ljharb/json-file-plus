@@ -1,6 +1,7 @@
 var test = require('tape');
 var path = require('path');
 var jsonFile = require('../index');
+var forEach = require('foreach');
 
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
@@ -40,11 +41,11 @@ test('returns a file', function (t) {
 			st.deepEqual(file.data, testContents, 'file.data matches expected');
 			st.test('.get()', function (sst) {
 				sst.test('with key', function (s2t) {
-					Object.keys(testContents).forEach(function (key) {
-						s2t.deepEqual(file.get(key), testContents[key], 'data from get("' + key + '") matches');
+					forEach(testContents, function (keyContents, key) {
+						s2t.deepEqual(file.get(key), keyConstants, 'data from get("' + key + '") matches');
 						s2t.test('async', function (s3t) {
 							file.get(key, function (err, data) {
-								s3t.deepEqual(data, testContents[key], 'data from async get("' + key + '") matches');
+								s3t.deepEqual(data, keyConstants, 'data from async get("' + key + '") matches');
 								s3t.end();
 							});
 						});
