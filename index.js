@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var extend = require('node.extend');
-var is = require('is-extended');
+var is = require('is');
 
 var setImmediate = setImmediate || function (func) { setTimeout(func, 0); };
 
@@ -18,21 +18,21 @@ var JSONFile = function (raw) {
 };
 JSONFile.prototype.get = function (key, callback) {
 	var data = extend({}, this.data);
-	if (is.isFunction(key)) {
+	if (is.function(key)) {
 		callback = key;
 		key = null;
 	}
 	var value = key ? data[key] : data;
-	if (is.isHash(value)) {
+	if (is.hash(value)) {
 		value = extend({}, value);
 	}
-	if (is.isFunction(callback)) {
+	if (is.function(callback)) {
 		setImmediate(function () { callback(null, value); });
 	}
 	return value;
 };
 JSONFile.prototype.set = function (obj) {
-	if (!is.isHash(obj)) { throw new TypeError('object must be a plain object'); }
+	if (!is.hash(obj)) { throw new TypeError('object must be a plain object'); }
 	extend(true, this.data, obj);
 };
 JSONFile.prototype.save = function (filename, callback) {
@@ -43,7 +43,7 @@ JSONFile.prototype.save = function (filename, callback) {
 };
 
 var readJSON = function (filename, callback) {
-	if (!is.isFunction(callback)) {
+	if (!is.function(callback)) {
 		throw new TypeError('callback must be a function');
 	}
 	fs.readFile(path.join(process.cwd(), filename), function (err, rawBuf) {
