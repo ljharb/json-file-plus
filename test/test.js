@@ -42,10 +42,10 @@ test('returns a file', function (t) {
 			st.test('.get()', function (sst) {
 				sst.test('with key', function (s2t) {
 					forEach(testContents, function (keyContents, key) {
-						s2t.deepEqual(file.get(key), keyConstants, 'data from get("' + key + '") matches');
+						s2t.deepEqual(file.get(key), keyContents, 'data from get("' + key + '") matches');
 						s2t.test('async', function (s3t) {
 							file.get(key, function (err, data) {
-								s3t.deepEqual(data, keyConstants, 'data from async get("' + key + '") matches');
+								s3t.deepEqual(data, keyContents, 'data from async get("' + key + '") matches');
 								s3t.end();
 							});
 						});
