@@ -18,7 +18,7 @@ var JSONFile = function (raw) {
 };
 JSONFile.prototype.get = function (key, callback) {
 	var data = extend({}, this.data);
-	if (is.function(key)) {
+	if (is.fn(key)) {
 		callback = key;
 		key = null;
 	}
@@ -26,7 +26,7 @@ JSONFile.prototype.get = function (key, callback) {
 	if (is.hash(value)) {
 		value = extend({}, value);
 	}
-	if (is.function(callback)) {
+	if (is.fn(callback)) {
 		setImmediate(function () { callback(null, value); });
 	}
 	return value;
@@ -43,7 +43,7 @@ JSONFile.prototype.save = function (filename, callback) {
 };
 
 var readJSON = function (filename, callback) {
-	if (!is.function(callback)) {
+	if (!is.fn(callback)) {
 		throw new TypeError('callback must be a function');
 	}
 	fs.readFile(path.join(process.cwd(), filename), function (err, rawBuf) {

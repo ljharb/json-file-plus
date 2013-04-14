@@ -20,8 +20,8 @@
 		"write"
 	],
 	"dependencies": {
-		"is": "~0.2.0",
-		"node.extend": "~1.0.2"
+		"is": "~0.2.1",
+		"node.extend": "~1.0.3"
 	},
 	"devDependencies": {
 		"tape": "~0.3.3",
