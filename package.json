@@ -20,7 +20,7 @@
 		"write"
 	],
 	"dependencies": {
-		"is": "~0.2.1",
+		"is": "~0.2.2",
 		"node.extend": "~1.0.3"
 	},
 	"devDependencies": {
