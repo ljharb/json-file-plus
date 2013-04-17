@@ -1,6 +1,6 @@
 {
 	"name": "json-file-plus",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "Jordan Harband",
 	"description": "Read from and write to a JSON file, minimizing diffs and preserving formatting.",
 	"license": "MIT",
@@ -20,7 +20,7 @@
 		"write"
 	],
 	"dependencies": {
-		"is": "~0.2.2",
+		"is": "~0.2.3",
 		"node.extend": "~1.0.3"
 	},
 	"devDependencies": {
