@@ -21,7 +21,7 @@
 	],
 	"dependencies": {
 		"is": "~0.2.3",
-		"node.extend": "~1.0.3"
+		"node.extend": "~1.0.4"
 	},
 	"devDependencies": {
 		"tape": "~0.3.3",
