@@ -1,6 +1,6 @@
 {
 	"name": "json-file-plus",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"author": "Jordan Harband",
 	"description": "Read from and write to a JSON file, minimizing diffs and preserving formatting.",
 	"license": "MIT",
