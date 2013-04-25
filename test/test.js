@@ -86,12 +86,13 @@ test('returns a file', function (t) {
 				sst.end();
 			});
 			st.test('setting invalid data', function (sst) {
-				sst.throws(function () { return file.set(null); }, TypeError, 'throws when given non-object');
-				sst.throws(function () { return file.set(true); }, TypeError, 'throws when given non-object');
-				sst.throws(function () { return file.set([]); }, TypeError, 'throws when given non-object');
-				sst.throws(function () { return file.set(function () {}); }, TypeError, 'throws when given non-object');
-				sst.throws(function () { return file.set('foo'); }, TypeError, 'throws when given non-object');
-				sst.throws(function () { return file.set(/f/); }, TypeError, 'throws when given non-object');
+				var error = new TypeError('object must be a plain object');
+				sst.throws(function () { return file.set(null); }, error, 'throws when given non-object');
+				sst.throws(function () { return file.set(true); }, error, 'throws when given non-object');
+				sst.throws(function () { return file.set([]); }, error, 'throws when given non-object');
+				sst.throws(function () { return file.set(function () {}); }, error, 'throws when given non-object');
+				sst.throws(function () { return file.set('foo'); }, error, 'throws when given non-object');
+				sst.throws(function () { return file.set(/f/); }, error, 'throws when given non-object');
 				sst.end();
 			});
 			st.end();
