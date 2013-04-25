@@ -35,7 +35,7 @@ jsonFile.read('package.json', function (err, file) {
 ```
 
 ## Tests
-Tests currently use tape - which doesn't yet work in node 0.10, but works in browserify. Rest assured, they pass.
+Simply run `npm test` in the repo
 
 [1]: https://npmjs.org/package/json-file-plus
 [2]: http://vb.teelaun.ch/ljharb/node-json-file.svg

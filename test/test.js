@@ -1,4 +1,4 @@
-var test = require('tape');
+var test = require('tap').test;
 var path = require('path');
 var jsonFile = require('../index');
 var forEach = require('foreach');
