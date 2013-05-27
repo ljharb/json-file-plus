@@ -46,7 +46,7 @@ var readJSON = function (filename, callback) {
 	if (!is.fn(callback)) {
 		throw new TypeError('callback must be a function');
 	}
-	fs.readFile(path.join(process.cwd(), filename), function (err, rawBuf) {
+	fs.readFile(filename, function (err, rawBuf) {
 		var file, raw;
 		if (!err) {
 			raw = rawBuf.toString('utf8');
