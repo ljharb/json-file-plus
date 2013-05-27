@@ -39,14 +39,14 @@ JSONFile.prototype.save = function (filename, callback) {
 	var endingNewlines = this.format.trailing ? "\n\n" : "\n";
 	var indent = this.format.indent || 2;
 	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
-	fs.writeFile(path.join(process.cwd(), filename), json, callback);
+	fs.writeFile(filename, json, callback);
 };
 
 var readJSON = function (filename, callback) {
 	if (!is.fn(callback)) {
 		throw new TypeError('callback must be a function');
 	}
-	fs.readFile(path.join(process.cwd(), filename), function (err, rawBuf) {
+	fs.readFile(filename, function (err, rawBuf) {
 		var file, raw;
 		if (!err) {
 			raw = rawBuf.toString('utf8');
