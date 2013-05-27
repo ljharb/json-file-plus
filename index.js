@@ -39,7 +39,7 @@ JSONFile.prototype.save = function (filename, callback) {
 	var endingNewlines = this.format.trailing ? "\n\n" : "\n";
 	var indent = this.format.indent || 2;
 	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
-	fs.writeFile(path.join(process.cwd(), filename), json, callback);
+	fs.writeFile(filename, json, callback);
 };
 
 var readJSON = function (filename, callback) {
