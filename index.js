@@ -48,12 +48,13 @@ var readJSON = function (filename, callback) {
 	}
 	fs.readFile(path.join(process.cwd(), filename), function (err, rawBuf) {
 		var file, raw;
+		
 		if (!err) {
 			raw = rawBuf.toString('utf8');
 			try { file = new JSONFile(raw); }
 			catch (e) { err = e; }
 		}
-		setImmediate(function () { callback(err, file); });
+		callback(err, file);
 	});
 };
 readJSON.JSONFile = JSONFile;
