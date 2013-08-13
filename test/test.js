@@ -124,12 +124,12 @@ test('#set()', function (t) {
 
 test('returns an error when no file', function (t) {
 	t.plan(1);
-	var filename = 'does not exist.json';
+	var filename = path.join(process.cwd(), 'does not exist.json');
 	jsonFile(filename, function (err, file) {
 		var expectedError = {
 			errno: 34,
 			code: "ENOENT",
-			path: path.join(process.cwd() + '/' + filename)
+			path: filename
 		};
 		t.deepEqual(err, expectedError, 'returned an error');
 		t.end();
