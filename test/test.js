@@ -70,7 +70,6 @@ test('#get()', function (t) {
 					st.deepEqual(data, keyContents, 'data from async get("' + key + '") matches');
 				});
 			});
-			st.end();
 		});
 
 		t.test('without key sync', function (s2t) {
@@ -87,7 +86,6 @@ test('#get()', function (t) {
 				s3t.notEqual(data, file.data, 'data from async get() is not the same reference');
 				s3t.end();
 			});
-			s2t.end();
 		});
 		t.end();
 	});
