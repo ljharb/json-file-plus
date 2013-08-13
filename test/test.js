@@ -27,8 +27,9 @@ test('returns a file', function (t) {
 });
 
 test('format', function (t) {
-	t.plan(3);
+	t.plan(4);
 	jsonFile(testFilename, function (err, file) {
+		t.notOk(err, 'no error');
 		t.equal(file.format.indent, '\t', 'reads tabs');
 		t.equal(file.format.trailing, true, 'reads trailing newline');
 		t.deepEqual(file.format, {
@@ -49,51 +50,66 @@ test('format', function (t) {
 	});
 });
 
-test('#get()', function (t) {
-	t.plan(2);
+test('#get(): file.data', function (st) {
+	st.plan(3);
 	jsonFile(testFilename, function (err, file) {
-		t.deepEqual(file.data, testContents, 'file.data matches expected');
-		t.notEqual(file.get('obj'), file.data.obj, 'get(key)->object is not the same reference');
+		st.notOk(err, 'no error');
+		st.deepEqual(file.data, testContents, 'file.data matches expected');
+		st.notEqual(file.get('obj'), file.data.obj, 'get(key)->object is not the same reference');
+		st.end();
+	});
+});
 
-		t.test('with key sync', function (st) {
-			st.plan(keys(testContents).length);
-			forEach(testContents, function (keyContents, key) {
-				st.deepEqual(file.get(key), keyContents, 'data from get("' + key + '") matches');
-			});
-			st.end();
+test('#get(): with key sync', function (st) {
+	st.plan(keys(testContents).length + 1);
+	jsonFile(testFilename, function (err, file) {
+		st.notOk(err, 'no error');
+		forEach(testContents, function (keyContents, key) {
+			st.deepEqual(file.get(key), keyContents, 'data from get("' + key + '") matches');
 		});
+		st.end();
+	});
+});
 
-		t.test('with key async', function (st) {
-			st.plan(keys(testContents).length);
-			forEach(testContents, function (keyContents, key) {
-				file.get(key, function (err, data) {
-					st.deepEqual(data, keyContents, 'data from async get("' + key + '") matches');
-				});
+test('#get(): with key async', function (st) {
+	st.plan(keys(testContents).length + 1);
+	jsonFile(testFilename, function (err, file) {
+		st.notOk(err, 'no error');
+		forEach(testContents, function (keyContents, key) {
+			file.get(key, function (err, data) {
+				st.deepEqual(data, keyContents, 'data from async get("' + key + '") matches');
 			});
 		});
+	});
+});
 
-		t.test('without key sync', function (s2t) {
-			var getData = file.get();
-			s2t.plan(2);
-			s2t.deepEqual(getData, file.data, 'data from get() matches');
-			s2t.notEqual(getData, file.data, 'data from get() is not the same reference');
+test('#get(): without key sync', function (s2t) {
+	s2t.plan(3);
+	jsonFile(testFilename, function (err, file) {
+		s2t.notOk(err, 'no error');
+		var getData = file.get();
+		s2t.deepEqual(getData, file.data, 'data from get() matches');
+		s2t.notEqual(getData, file.data, 'data from get() is not the same reference');
+		s2t.end();
+	});
+});
+
+test('#get(): without key async', function (s2t) {
+	s2t.plan(3);
+	jsonFile(testFilename, function (err, file) {
+		s2t.notOk(err, 'no error');
+		file.get(function (err, data) {
+			s2t.deepEqual(data, file.data, 'data from async get() matches');
+			s2t.notEqual(data, file.data, 'data from async get() is not the same reference');
 			s2t.end();
 		});
-		t.test('without key async', function (s2t) {
-			s2t.plan(2);
-			file.get(function (err, data) {
-				s2t.deepEqual(data, file.data, 'data from async get() matches');
-				s2t.notEqual(data, file.data, 'data from async get() is not the same reference');
-				s2t.end();
-			});
-		});
-		t.end();
 	});
 });
 
 test('#set()', function (t) {
-	t.plan(3);
+	t.plan(4);
 	jsonFile(testFilename, function (err, file) {
+		t.notOk(err, 'no error');
 		t.equal(undefined, file.data.foobar, 'foo starts undefined');
 		var data = {
 			foobar: {
@@ -105,18 +121,22 @@ test('#set()', function (t) {
 		t.deepEqual(file.data.foobar, data.foobar, 'expected data is set');
 		t.notEqual(file.data.foobar, data.foobar, 'data is not the same reference');
 
-		t.test('setting invalid data', function (st) {
-			st.plan(6);
-			var error = new TypeError('object must be a plain object');
-			st.throws(function () { return file.set(null); }, error, 'throws when given non-object');
-			st.throws(function () { return file.set(true); }, error, 'throws when given non-object');
-			st.throws(function () { return file.set([]); }, error, 'throws when given non-object');
-			st.throws(function () { return file.set(function () {}); }, error, 'throws when given non-object');
-			st.throws(function () { return file.set('foo'); }, error, 'throws when given non-object');
-			st.throws(function () { return file.set(/f/); }, error, 'throws when given non-object');
-			st.end();
-		});
 		t.end();
+	});
+});
+
+test('#set(): setting invalid data', function (st) {
+	st.plan(7);
+	jsonFile(testFilename, function (err, file) {
+		st.notOk(err, 'no error');
+		var error = new TypeError('object must be a plain object');
+		st.throws(function () { return file.set(null); }, error, 'throws when given non-object');
+		st.throws(function () { return file.set(true); }, error, 'throws when given non-object');
+		st.throws(function () { return file.set([]); }, error, 'throws when given non-object');
+		st.throws(function () { return file.set(function () {}); }, error, 'throws when given non-object');
+		st.throws(function () { return file.set('foo'); }, error, 'throws when given non-object');
+		st.throws(function () { return file.set(/f/); }, error, 'throws when given non-object');
+		st.end();
 	});
 });
 
