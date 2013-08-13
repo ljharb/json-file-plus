@@ -83,8 +83,8 @@ test('#get()', function (t) {
 			s2t.plan(2);
 			file.get(function (err, data) {
 				s2t.deepEqual(data, file.data, 'data from async get() matches');
-				s3t.notEqual(data, file.data, 'data from async get() is not the same reference');
-				s3t.end();
+				s2t.notEqual(data, file.data, 'data from async get() is not the same reference');
+				s2t.end();
 			});
 		});
 		t.end();
