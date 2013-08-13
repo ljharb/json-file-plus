@@ -24,7 +24,7 @@
 		"node.extend": "~1.0.7"
 	},
 	"devDependencies": {
-		"tape": "~1.0.2",
+		"tape": "~1.0.4",
 		"foreach": "~2.0.3",
 		"object-keys": "~0.3.0"
 	}
