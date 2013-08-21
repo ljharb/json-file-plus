@@ -3,7 +3,11 @@
 	"null": null,
 	"true": true,
 	"false": false,
-	"arr": [1, 2, 3],
+	"arr": [
+		1,
+		2,
+		3
+	],
 	"obj": {
 		"nested": {}
 	}

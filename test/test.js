@@ -162,3 +162,22 @@ test('remembers filename', function (t) {
 	});
 });
 
+test('saves properly', function (t) {
+	t.plan(4);
+	jsonFile(testFilename, function (err, file) {
+		t.equal(file.filename, testFilename, 'filename equals ' + testFilename);
+		file.set({ foo: !testContents.foo });
+		file.save(function (err) {
+			t.notOk(err, 'no error');
+			jsonFile(testFilename, function (err, file2) {
+				t.equal(file2.get('foo'), !testContents.foo, 'value was properly saved');
+				file2.set({ foo: testContents.foo }); // restore original value
+				file2.save(function (err) {
+					t.notOk(err, 'no error');
+					t.end();
+				});
+			});
+		});
+	});
+});
+

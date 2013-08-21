@@ -36,11 +36,11 @@ JSONFile.prototype.set = function (obj) {
 	if (!is.hash(obj)) { throw new TypeError('object must be a plain object'); }
 	extend(true, this.data, obj);
 };
-JSONFile.prototype.save = function (filename, callback) {
+JSONFile.prototype.save = function (callback) {
 	var endingNewlines = this.format.trailing ? "\n\n" : "\n";
 	var indent = this.format.indent || 2;
 	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
-	fs.writeFile(filename, json, callback);
+	fs.writeFile(this.filename, json, callback);
 };
 
 var readJSON = function (filename, callback) {
