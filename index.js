@@ -5,7 +5,7 @@ var is = require('is');
 
 var setImmediate = setImmediate || function (func) { setTimeout(func, 0); };
 
-var JSONFile = function (raw) {
+var JSONFile = function (filename, raw) {
 	var hasTrailingNewline = (/\n\n$/).test(raw),
 		indentMatch = raw.match(/^[ \t]+/m),
 		indent = indentMatch ? indentMatch[0] : 2;
@@ -14,6 +14,7 @@ var JSONFile = function (raw) {
 		indent: indent,
 		trailing: hasTrailingNewline
 	};
+	this.filename = filename;
 	this.data = JSON.parse(raw);
 };
 JSONFile.prototype.get = function (key, callback) {
@@ -51,7 +52,7 @@ var readJSON = function (filename, callback) {
 		
 		if (!err) {
 			raw = rawBuf.toString('utf8');
-			try { file = new JSONFile(raw); }
+			try { file = new JSONFile(filename, raw); }
 			catch (e) { err = e; }
 		}
 		callback(err, file);

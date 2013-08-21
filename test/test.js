@@ -154,3 +154,11 @@ test('returns an error when no file', function (t) {
 	});
 });
 
+test('remembers filename', function (t) {
+	t.plan(1);
+	jsonFile(testFilename, function (err, file) {
+		t.equal(file.filename, testFilename, 'filename equals ' + testFilename);
+		t.end();
+	});
+});
+
