@@ -7,7 +7,9 @@ A module to read from and write to JSON files, without losing formatting, to min
 ## Example
 ```js
 var jsonFile = require('json-file-plus');
-jsonFile.read('package.json', function (err, file) {
+var path = require('path'); // in node-core
+var filename = path.join(process.cwd(), 'package.json');
+jsonFile.read(filename, function (err, file) {
 	if (err) { return doSomethingWithError(err); }
 
 	file.data; // Direct access to the data from the file
@@ -28,9 +30,12 @@ jsonFile.read('package.json', function (err, file) {
 		}
 	});
 
+	/* change the filename if desired */
+	file.filename = path.join(process.cwd(), 'new-package.json');
+
 	/* Save the file, preserving formatting. */
 	/* Callback will be passed to fs.writeFile */
-	file.save('new-package.json', fsWriteFileCallback);
+	file.save(fsWriteFileCallback);
 });
 ```
 
