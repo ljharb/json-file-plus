@@ -7,7 +7,7 @@ var setImmediate = setImmediate || function (func) { setTimeout(func, 0); };
 
 var JSONFile = function (filename, raw) {
 	var hasTrailingNewline = (/\n\n$/).test(raw),
-		indentMatch = raw.match(/^[ \t]+/m),
+		indentMatch = String(raw).match(/^[ \t]+/m),
 		indent = indentMatch ? indentMatch[0] : 2;
 
 	this.format = {
