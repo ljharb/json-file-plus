@@ -27,7 +27,7 @@ test('returns a file', function (t) {
 });
 
 test('format', function (t) {
-	t.plan(4);
+	t.plan(5);
 	jsonFile(testFilename, function (err, file) {
 		t.notOk(err, 'no error');
 		t.equal(file.format.indent, '\t', 'reads tabs');
