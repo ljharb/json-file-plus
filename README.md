@@ -1,8 +1,8 @@
 #json-file-plus <sup>[![Version Badge][2]][1]</sup>
 
-[![Build Status][3]][4] [![dependency status][5]][6]
+[![Build Status][3]][4] [![dependency status][5]][6] [![dev dependency status][7]][8]
 
-[![npm badge][7]][1]
+[![npm badge][9]][1]
 
 A module to read from and write to JSON files, without losing formatting, to minimize diffs.
 
@@ -50,5 +50,7 @@ Simply run `npm test` in the repo
 [4]: https://travis-ci.org/ljharb/node-json-file
 [5]: https://david-dm.org/ljharb/node-json-file.png
 [6]: https://david-dm.org/ljharb/node-json-file
-[7]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
+[7]: https://david-dm.org/ljharb/node-json-file/dev-status.png
+[8]: https://david-dm.org/ljharb/node-json-file#info=devDependencies
+[9]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
 
