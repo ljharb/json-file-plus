@@ -2,6 +2,8 @@
 
 [![Build Status][3]][4] [![dependency status][5]][6]
 
+[![npm badge][7]][1]
+
 A module to read from and write to JSON files, without losing formatting, to minimize diffs.
 
 ## Example
@@ -48,4 +50,5 @@ Simply run `npm test` in the repo
 [4]: https://travis-ci.org/ljharb/node-json-file
 [5]: https://david-dm.org/ljharb/node-json-file.png
 [6]: https://david-dm.org/ljharb/node-json-file
+[7]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
 
