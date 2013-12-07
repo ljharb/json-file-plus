@@ -1,3 +1,9 @@
+[0.2.3](https://github.com/ljharb/node-json-file/releases/tag/v0.2.3) / 2013-12-07
+==================
+  * ensure raw file contents are compared as a string - in node 0.6 and 0.8, it's a Buffer.
+  * Updating `tape`
+  * Adding some badges to `README`
+
 [0.2.2](https://github.com/ljharb/node-json-file/releases/tag/v0.2.2) / 2013-10-14
 ==================
   * Adding a `CHANGELOG`
