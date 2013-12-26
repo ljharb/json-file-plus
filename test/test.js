@@ -17,11 +17,46 @@ var testContents = {
 	}
 };
 
+test('requires a callback', function (t) {
+	t.plan(6);
+	t.throws(function () { jsonFile(testFilename); }, TypeError, 'requires a function');
+	t.throws(function () { jsonFile(testFilename, null); }, TypeError, 'requires a function');
+	t.throws(function () { jsonFile(testFilename, true); }, TypeError, 'requires a function');
+	t.throws(function () { jsonFile(testFilename, /a/g); }, TypeError, 'requires a function');
+	t.throws(function () { jsonFile(testFilename, []); }, TypeError, 'requires a function');
+	t.throws(function () { jsonFile(testFilename, {}); }, TypeError, 'requires a function');
+	t.end();
+});
+
 test('returns a file', function (t) {
 	t.plan(2);
 	jsonFile(testFilename, function (err, file) {
 		t.notOk(err, 'no error');
 		t.ok(file instanceof jsonFile.JSONFile, 'file is instance of JSONFile');
+		t.end();
+	});
+});
+
+test('returns an exception if the file is not found', function (t) {
+	t.plan(2);
+	jsonFile('NOT A REAL FILE', function (err, file) {
+		var expectedError = {
+			errno: 34,
+			code: 'ENOENT',
+			path: 'NOT A REAL FILE'
+		};
+		t.deepEqual(err, expectedError, 'returns an error');
+		t.equal(file, undefined, 'file is undefined');
+		t.end();
+	});
+});
+
+test('returns an exception if the file has invalid JSON', function (t) {
+	t.plan(3);
+	jsonFile(__filename, function (err, file) {
+		t.ok(err instanceof SyntaxError, 'error is a SyntaxError');
+		t.equal(err.message, 'Unexpected token v', 'gives the expected error');
+		t.equal(file, undefined, 'file is undefined');
 		t.end();
 	});
 });
