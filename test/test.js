@@ -38,10 +38,12 @@ test('returns a file', function (t) {
 });
 
 test('returns an exception if the file is not found', function (t) {
-	t.plan(2);
+	t.plan(4);
 	jsonFile('NOT A REAL FILE', function (err, file) {
+		t.ok(err, 'error is truthy');
+		t.ok(err.errno === 34 || err.errno === -2, 'error number is correct');
 		var expectedError = {
-			errno: 34,
+			errno: err.errno,
 			code: 'ENOENT',
 			path: 'NOT A REAL FILE'
 		};
@@ -176,11 +178,13 @@ test('#set(): setting invalid data', function (st) {
 });
 
 test('returns an error when no file', function (t) {
-	t.plan(1);
+	t.plan(3);
 	var filename = path.join(process.cwd(), 'does not exist.json');
 	jsonFile(filename, function (err, file) {
+		t.ok(err, 'error is truthy');
+		t.ok(err.errno === 34 || err.errno === -2, 'error number is correct');
 		var expectedError = {
-			errno: 34,
+			errno: err.errno,
 			code: "ENOENT",
 			path: filename
 		};
