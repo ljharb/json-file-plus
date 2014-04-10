@@ -41,7 +41,7 @@ test('returns an exception if the file is not found', function (t) {
 	t.plan(4);
 	jsonFile('NOT A REAL FILE', function (err, file) {
 		t.ok(err, 'error is truthy');
-		t.ok(err.errno === 34 /*|| err.errno === -2*/, 'error number is correct');
+		t.ok(err.errno === 34 || err.errno === -2, 'error number is correct');
 		var expectedError = {
 			errno: err.errno,
 			code: 'ENOENT',
