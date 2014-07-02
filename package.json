@@ -6,9 +6,10 @@
 	"license": "MIT",
 	"main": "index.js",
 	"scripts": {
-		"test": "node test/test.js",
+		"test": "npm run lint && node test/test.js",
 		"coverage": "covert test/test.js",
-		"coverage-quiet": "covert test/test.js --quiet"
+		"coverage-quiet": "covert test/test.js --quiet",
+		"lint": "jscs *.js test/*.js"
 	},
 	"repository": {
 		"type": "git",
@@ -23,6 +24,7 @@
 	],
 	"dependencies": {
 		"is": "~0.3.0",
+		"jscs": "~1.5.7",
 		"node.extend": "~1.0.10"
 	},
 	"devDependencies": {
