@@ -23,7 +23,7 @@
 		"write"
 	],
 	"dependencies": {
-		"is": "~0.3.0",
+		"is": "~1.0.0",
 		"jscs": "~1.5.7",
 		"node.extend": "~1.0.10"
 	},
