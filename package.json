@@ -31,7 +31,7 @@
 		"tape": "~2.14.0",
 		"foreach": "~2.0.4",
 		"object-keys": "~0.6.0",
-		"covert": "~0.4.0"
+		"covert": "~1.0.0"
 	},
 	"engines": {
 		"node": ">= 0.4"
