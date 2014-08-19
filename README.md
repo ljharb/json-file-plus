@@ -46,11 +46,11 @@ Simply run `npm test` in the repo
 
 [1]: https://npmjs.org/package/json-file-plus
 [2]: http://vb.teelaun.ch/ljharb/node-json-file.svg
-[3]: https://travis-ci.org/ljharb/node-json-file.png
+[3]: https://travis-ci.org/ljharb/node-json-file.svg
 [4]: https://travis-ci.org/ljharb/node-json-file
-[5]: https://david-dm.org/ljharb/node-json-file.png
+[5]: https://david-dm.org/ljharb/node-json-file.svg
 [6]: https://david-dm.org/ljharb/node-json-file
-[7]: https://david-dm.org/ljharb/node-json-file/dev-status.png
+[7]: https://david-dm.org/ljharb/node-json-file/dev-status.svg
 [8]: https://david-dm.org/ljharb/node-json-file#info=devDependencies
 [9]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
 
