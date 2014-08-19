@@ -17,6 +17,10 @@ var testContents = {
 	}
 };
 
+var isFileNotFoundError = function (err) {
+	return [34, -2].indexOf(err.errno) > -1;
+};
+
 test('requires a callback', function (t) {
 	t.plan(6);
 	t.throws(function () { jsonFile(testFilename); }, TypeError, 'requires a function');
@@ -41,7 +45,7 @@ test('returns an exception if the file is not found', function (t) {
 	t.plan(4);
 	jsonFile('NOT A REAL FILE', function (err, file) {
 		t.ok(err, 'error is truthy');
-		t.ok(err.errno === 34 || err.errno === -2, 'error number is correct');
+		t.ok(isFileNotFoundError(err), 'error number is correct');
 		var expectedError = {
 			errno: err.errno,
 			code: 'ENOENT',
@@ -182,7 +186,7 @@ test('returns an error when no file', function (t) {
 	var filename = path.join(process.cwd(), 'does not exist.json');
 	jsonFile(filename, function (err, file) {
 		t.ok(err, 'error is truthy');
-		t.ok(err.errno === 34 || err.errno === -2, 'error number is correct');
+		t.ok(isFileNotFoundError(err), 'error number is correct');
 		var expectedError = {
 			errno: err.errno,
 			code: "ENOENT",
