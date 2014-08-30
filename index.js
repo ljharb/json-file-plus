@@ -6,9 +6,9 @@ var is = require('is');
 var setImmediate = setImmediate || function (func) { setTimeout(func, 0); };
 
 var JSONFile = function (filename, raw) {
-	var hasTrailingNewline = (/\n\n$/).test(raw),
-		indentMatch = String(raw).match(/^[ \t]+/m),
-		indent = indentMatch ? indentMatch[0] : 2;
+	var hasTrailingNewline = (/\n\n$/).test(raw);
+	var indentMatch = String(raw).match(/^[ \t]+/m);
+	var indent = indentMatch ? indentMatch[0] : 2;
 
 	this.format = {
 		indent: indent,
