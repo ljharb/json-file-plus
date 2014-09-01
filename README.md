@@ -1,6 +1,10 @@
 #json-file-plus <sup>[![Version Badge][2]][1]</sup>
 
-[![Build Status][3]][4] [![dependency status][5]][6] [![dev dependency status][7]][8]
+[![Build Status][3]][4]
+[![dependency status][5]][6]
+[![dev dependency status][7]][8]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
 [![npm badge][9]][1]
 
@@ -53,4 +57,8 @@ Simply run `npm test` in the repo
 [7]: https://david-dm.org/ljharb/node-json-file/dev-status.svg
 [8]: https://david-dm.org/ljharb/node-json-file#info=devDependencies
 [9]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
+[license-image]: http://img.shields.io/npm/l/json-file-plus.svg
+[license-url]: LICENSE
+[downloads-image]: http://img.shields.io/npm/dm/json-file-plus.svg
+[downloads-url]: https://npmjs.org/package/json-file-plus
 
