@@ -60,5 +60,5 @@ Simply run `npm test` in the repo
 [license-image]: http://img.shields.io/npm/l/json-file-plus.svg
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/json-file-plus.svg
-[downloads-url]: https://npmjs.org/package/json-file-plus
+[downloads-url]: http://npm-stat.com/charts.html?package=json-file-plus
 
