@@ -1,4 +1,4 @@
-#json-file-plus <sup>[![Version Badge][2]][1]</sup>
+#json-file-plus <sup>[![Version Badge][2]][npm-url]</sup>
 
 [![Build Status][3]][4]
 [![dependency status][5]][6]
@@ -6,7 +6,7 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-[![npm badge][9]][1]
+[![npm badge][9]][npm-url]
 
 A module to read from and write to JSON files, without losing formatting, to minimize diffs.
 
@@ -48,7 +48,7 @@ jsonFile(filename, function (err, file) {
 ## Tests
 Simply run `npm test` in the repo
 
-[1]: https://npmjs.org/package/json-file-plus
+[npm-url]: https://npmjs.org/package/json-file-plus
 [2]: http://vb.teelaun.ch/ljharb/node-json-file.svg
 [3]: https://travis-ci.org/ljharb/node-json-file.svg
 [4]: https://travis-ci.org/ljharb/node-json-file
