@@ -1,6 +1,6 @@
 #json-file-plus <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
-[![Build Status][3]][4]
+[![Build Status][travis-svg]][travis-url]
 [![dependency status][5]][6]
 [![dev dependency status][7]][8]
 [![License][license-image]][license-url]
@@ -50,8 +50,8 @@ Simply run `npm test` in the repo
 
 [npm-url]: https://npmjs.org/package/json-file-plus
 [npm-version-svg]: http://vb.teelaun.ch/ljharb/node-json-file.svg
-[3]: https://travis-ci.org/ljharb/node-json-file.svg
-[4]: https://travis-ci.org/ljharb/node-json-file
+[travis-svg]: https://travis-ci.org/ljharb/node-json-file.svg
+[travis-url]: https://travis-ci.org/ljharb/node-json-file
 [5]: https://david-dm.org/ljharb/node-json-file.svg
 [6]: https://david-dm.org/ljharb/node-json-file
 [7]: https://david-dm.org/ljharb/node-json-file/dev-status.svg
