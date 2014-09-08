@@ -6,7 +6,7 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-[![npm badge][9]][npm-url]
+[![npm badge][npm-badge-png]][npm-url]
 
 A module to read from and write to JSON files, without losing formatting, to minimize diffs.
 
@@ -56,7 +56,7 @@ Simply run `npm test` in the repo
 [deps-url]: https://david-dm.org/ljharb/node-json-file
 [dev-deps-svg]: https://david-dm.org/ljharb/node-json-file/dev-status.svg
 [dev-deps-url]: https://david-dm.org/ljharb/node-json-file#info=devDependencies
-[9]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
+[npm-badge-png]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
 [license-image]: http://img.shields.io/npm/l/json-file-plus.svg
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/json-file-plus.svg
