@@ -1,4 +1,4 @@
-#json-file-plus <sup>[![Version Badge][2]][npm-url]</sup>
+#json-file-plus <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
 [![Build Status][3]][4]
 [![dependency status][5]][6]
@@ -49,7 +49,7 @@ jsonFile(filename, function (err, file) {
 Simply run `npm test` in the repo
 
 [npm-url]: https://npmjs.org/package/json-file-plus
-[2]: http://vb.teelaun.ch/ljharb/node-json-file.svg
+[npm-version-svg]: http://vb.teelaun.ch/ljharb/node-json-file.svg
 [3]: https://travis-ci.org/ljharb/node-json-file.svg
 [4]: https://travis-ci.org/ljharb/node-json-file
 [5]: https://david-dm.org/ljharb/node-json-file.svg
