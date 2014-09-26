@@ -15,16 +15,17 @@ A module to read from and write to JSON files, without losing formatting, to min
 var jsonFile = require('json-file-plus');
 var path = require('path'); // in node-core
 var filename = path.join(process.cwd(), 'package.json');
+/* Note: jsonFile also returns a Promise, if you prefer that to a Node-style callback ("errorback"). */
 jsonFile(filename, function (err, file) {
 	if (err) { return doSomethingWithError(err); }
 
 	file.data; // Direct access to the data from the file
 	file.format; // extracted formatting data. change at will.
 
-	file.get('version'); // get top-level keys, synchronously
-	file.get('version', callback); // get top-level keys, asynchronously
-	file.get(); // get entire data, synchronously
-	file.get(callback); // get entire data, asynchronously
+	file.get('version'); // get top-level keys. returns a Promise
+	file.get('version', callback); // get top-level keys. calls the errorback
+	file.get(); // get entire data. returns a Promise
+	file.get(callback); // get entire data. calls the errorback
 
 	/* pass any plain object into "set" to merge in a deep copy */
 	/* please note: references will be broken. */
@@ -40,8 +41,13 @@ jsonFile(filename, function (err, file) {
 	file.filename = path.join(process.cwd(), 'new-package.json');
 
 	/* Save the file, preserving formatting. */
-	/* Callback will be passed to fs.writeFile */
-	file.save(fsWriteFileCallback);
+	/* Errorback will be passed to fs.writeFile */
+	/* Returns a Promise. */
+	file.save(fsWriteFileCallback).then(function () {
+		console.log('success!');
+	}, function (err) {
+		console.log('error!', err);
+	});
 });
 ```
 
