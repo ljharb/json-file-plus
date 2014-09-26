@@ -2,8 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var extend = require('node.extend');
 var is = require('is');
-
-var setImmediate = setImmediate || function (func) { setTimeout(func, 0); };
+var promiseback = require('promiseback');
 
 var JSONFile = function (filename, raw) {
 	var hasTrailingNewline = (/\n\n$/).test(raw);
@@ -27,10 +26,9 @@ JSONFile.prototype.get = function (key, callback) {
 	if (is.hash(value)) {
 		value = extend({}, value);
 	}
-	if (is.fn(callback)) {
-		setImmediate(function () { callback(null, value); });
-	}
-	return value;
+	var deferred = promiseback(callback);
+	deferred.resolve(value);
+	return deferred.promise;
 };
 JSONFile.prototype.set = function (obj) {
 	if (!is.hash(obj)) { throw new TypeError('object must be a plain object'); }
@@ -40,13 +38,20 @@ JSONFile.prototype.save = function (callback) {
 	var endingNewlines = this.format.trailing ? "\n\n" : "\n";
 	var indent = this.format.indent || 2;
 	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
-	fs.writeFile(this.filename, json, callback);
+	var deferred = promiseback(callback);
+	fs.writeFile(this.filename, json, deferred.resolve);
+	return deferred.promise;
 };
 
-var readJSON = function (filename, callback) {
-	if (!is.fn(callback)) {
-		throw new TypeError('callback must be a function');
+var readJSON = function (filename) {
+	var callback;
+	if (arguments.length > 1) {
+		callback = arguments[1];
+		if (!is.fn(callback)) {
+			throw new TypeError('callback must be a function if provided');
+		}
 	}
+	var deferred = promiseback(callback);
 	fs.readFile(filename, { encoding: 'utf8' }, function (err, raw) {
 		var file;
 
@@ -54,8 +59,13 @@ var readJSON = function (filename, callback) {
 			try { file = new JSONFile(filename, raw); }
 			catch (e) { err = e; }
 		}
-		callback(err, file);
+		if (err) {
+			deferred.reject(err);
+		} else {
+			deferred.resolve(file);
+		}
 	});
+	return deferred.promise;
 };
 readJSON.JSONFile = JSONFile;
 

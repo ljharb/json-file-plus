@@ -21,9 +21,9 @@ var isFileNotFoundError = function (err) {
 	return [34, -2].indexOf(err.errno) > -1;
 };
 
-test('requires a callback', function (t) {
+test('requires a callback when arg is provided', function (t) {
 	t.plan(6);
-	t.throws(function () { jsonFile(testFilename); }, TypeError, 'requires a function');
+	t.throws(function () { jsonFile(testFilename, undefined); }, TypeError, 'requires a function');
 	t.throws(function () { jsonFile(testFilename, null); }, TypeError, 'requires a function');
 	t.throws(function () { jsonFile(testFilename, true); }, TypeError, 'requires a function');
 	t.throws(function () { jsonFile(testFilename, /a/g); }, TypeError, 'requires a function');
@@ -96,46 +96,50 @@ test('#get(): file.data', function (st) {
 	jsonFile(testFilename, function (err, file) {
 		st.error(err, 'no error');
 		st.deepEqual(file.data, testContents, 'file.data matches expected');
-		st.notEqual(file.get('obj'), file.data.obj, 'get(key)->object is not the same reference');
-		st.end();
-	});
-});
-
-test('#get(): with key sync', function (st) {
-	st.plan(keys(testContents).length + 1);
-	jsonFile(testFilename, function (err, file) {
-		st.error(err, 'no error');
-		forEach(testContents, function (keyContents, key) {
-			st.deepEqual(file.get(key), keyContents, 'data from get("' + key + '") matches');
+		file.get('obj').then(function (value) {
+			st.notEqual(value, file.data.obj, 'get(key)->object is not the same reference');
+			st.end();
 		});
-		st.end();
 	});
 });
 
-test('#get(): with key async', function (st) {
+test('#get(): with key, promise', function (st) {
 	st.plan(keys(testContents).length + 1);
 	jsonFile(testFilename, function (err, file) {
 		st.error(err, 'no error');
 		forEach(testContents, function (keyContents, key) {
-			file.get(key, function (err, data) {
-				st.deepEqual(data, keyContents, 'data from async get("' + key + '") matches');
+			file.get(key).then(function (value) {
+				st.deepEqual(value, keyContents, 'data from get("' + key + '") matches');
 			});
 		});
 	});
 });
 
-test('#get(): without key sync', function (s2t) {
-	s2t.plan(3);
+test('#get(): with key, callback', function (st) {
+	st.plan(keys(testContents).length + 1);
 	jsonFile(testFilename, function (err, file) {
-		s2t.error(err, 'no error');
-		var getData = file.get();
-		s2t.deepEqual(getData, file.data, 'data from get() matches');
-		s2t.notEqual(getData, file.data, 'data from get() is not the same reference');
-		s2t.end();
+		st.error(err, 'no error');
+		forEach(testContents, function (keyContents, key) {
+			file.get(key, function (err, data) {
+				st.deepEqual(data, keyContents, 'data from callback get("' + key + '") matches');
+			});
+		});
 	});
 });
 
-test('#get(): without key async', function (s2t) {
+test('#get(): without key, promise', function (s2t) {
+	s2t.plan(3);
+	jsonFile(testFilename, function (err, file) {
+		s2t.error(err, 'no error');
+		file.get().then(function (getData) {
+			s2t.deepEqual(getData, file.data, 'data from get() matches');
+			s2t.notEqual(getData, file.data, 'data from get() is not the same reference');
+			s2t.end();
+		});
+	});
+});
+
+test('#get(): without key, callback', function (s2t) {
 	s2t.plan(3);
 	jsonFile(testFilename, function (err, file) {
 		s2t.error(err, 'no error');
@@ -206,18 +210,23 @@ test('remembers filename', function (t) {
 });
 
 test('saves properly', function (t) {
-	t.plan(4);
+	t.plan(5);
 	jsonFile(testFilename, function (err, file) {
 		t.equal(file.filename, testFilename, 'filename equals ' + testFilename);
 		file.set({ foo: !testContents.foo });
 		file.save(function (err) {
 			t.error(err, 'no error');
 			jsonFile(testFilename, function (err, file2) {
-				t.equal(file2.get('foo'), !testContents.foo, 'value was properly saved');
-				file2.set({ foo: testContents.foo }); // restore original value
-				file2.save(function (err) {
-					t.error(err, 'no error');
-					t.end();
+				file2.get('foo').then(function (value) {
+					t.equal(value, !testContents.foo, 'value was properly saved');
+					file2.set({ foo: testContents.foo }); // restore original value
+					file2.save(function (err) {
+						t.error(err, 'save callback: no error');
+					}).then(function () {
+						t.ok(true, 'save promise: success');
+					}, function (err) {
+						t.fail('save promise: error. should not be here.');
+					});
 				});
 			});
 		});
