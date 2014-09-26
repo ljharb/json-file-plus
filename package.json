@@ -20,7 +20,9 @@
 		"json file",
 		"formatting",
 		"read",
-		"write"
+		"write",
+		"promise",
+		"promiseback"
 	],
 	"dependencies": {
 		"is": "~2.0.1",
