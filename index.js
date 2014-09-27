@@ -35,7 +35,7 @@ JSONFile.prototype.set = function (obj) {
 	extend(true, this.data, obj);
 };
 JSONFile.prototype.save = function (callback) {
-	var endingNewlines = this.format.trailing ? "\n\n" : "\n";
+	var endingNewlines = this.format.trailing ? '\n\n' : '\n';
 	var indent = this.format.indent || 2;
 	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
 	var deferred = promiseback(callback);

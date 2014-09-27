@@ -7,7 +7,7 @@ var keys = require('object-keys');
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
 var testContents = {
-	foo: "bar",
+	foo: 'bar',
 	null: null,
 	true: true,
 	false: false,
@@ -193,7 +193,7 @@ test('returns an error when no file', function (t) {
 		t.ok(isFileNotFoundError(err), 'error number is correct');
 		var expectedError = {
 			errno: err.errno,
-			code: "ENOENT",
+			code: 'ENOENT',
 			path: filename
 		};
 		t.deepEqual(err, expectedError, 'returned an error');
