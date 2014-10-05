@@ -224,7 +224,7 @@ test('saves properly', function (t) {
 						t.error(err, 'save callback: no error');
 					}).then(function () {
 						t.ok(true, 'save promise: success');
-					}, function (err) {
+					})['catch'](function (err) {
 						t.fail('save promise: error. should not be here.');
 					});
 				});

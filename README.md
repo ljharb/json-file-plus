@@ -45,7 +45,7 @@ jsonFile(filename, function (err, file) {
 	/* Returns a Promise. */
 	file.save(fsWriteFileCallback).then(function () {
 		console.log('success!');
-	}, function (err) {
+	}).catch(function (err) {
 		console.log('error!', err);
 	});
 });
