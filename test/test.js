@@ -51,6 +51,9 @@ test('returns an exception if the file is not found', function (t) {
 			code: 'ENOENT',
 			path: 'NOT A REAL FILE'
 		};
+		if (err.hasOwnProperty('syscall')) {
+			expectedError.syscall = 'open';
+		}
 		t.deepEqual(err, expectedError, 'returns an error');
 		t.equal(file, undefined, 'file is undefined');
 		t.end();
@@ -196,6 +199,9 @@ test('returns an error when no file', function (t) {
 			code: 'ENOENT',
 			path: filename
 		};
+		if (err.hasOwnProperty('syscall')) {
+			expectedError.syscall = 'open';
+		}
 		t.deepEqual(err, expectedError, 'returned an error');
 		t.end();
 	});
