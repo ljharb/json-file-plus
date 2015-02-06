@@ -27,10 +27,10 @@
 	"dependencies": {
 		"is": "~2.2.0",
 		"node.extend": "~1.1.3",
-		"promiseback": "~2.0.0"
+		"promiseback": "~2.0.1"
 	},
 	"devDependencies": {
-		"tape": "~3.4.0",
+		"tape": "~3.5.0",
 		"foreach": "~2.0.5",
 		"object-keys": "~1.0.3",
 		"covert": "1.0.0",
