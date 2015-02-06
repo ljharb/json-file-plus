@@ -1,6 +1,52 @@
+[2.0.1](https://github.com/ljharb/node-json-file/releases/tag/v2.0.1) / 2015-02-06
+==================
+  * Update `is`, `tape`, `jscs`, `node.extend`, `object-keys`, `promiseback`
+  * Run `travis-ci` tests on `iojs`
+
+[2.0.0](https://github.com/ljharb/node-json-file/releases/tag/v2.0.0) / 2014-09-25
+==================
+  * Update `jscs`, `tape`, `foreach`
+  * Use `promiseback` to both take a callback and return a Promise
+
+[1.0.7](https://github.com/ljharb/node-json-file/releases/tag/v1.0.7) / 2014-09-03
+==================
+  * Update `jscs`, `is`, `object-keys`
+
+[1.0.6](https://github.com/ljharb/node-json-file/releases/tag/v1.0.6) / 2014-09-01
+==================
+  * Update `jscs`, `node.extend`
+  * Add badges to README
+
+[1.0.5](https://github.com/ljharb/node-json-file/releases/tag/v1.0.5) / 2014-08-27
+==================
+  * Update `object-keys`
+
+[1.0.4](https://github.com/ljharb/node-json-file/releases/tag/v1.0.4) / 2014-08-25
+==================
+  * Update `is`
+
+[1.0.3](https://github.com/ljharb/node-json-file/releases/tag/v1.0.3) / 2014-08-25
+==================
+  * Update `is`
+  * clean up README
+
+[1.0.2](https://github.com/ljharb/node-json-file/releases/tag/v1.0.2) / 2014-08-13
+==================
+  * Oops, `jscs` should be a devDependency
+
+[1.0.1](https://github.com/ljharb/node-json-file/releases/tag/v1.0.1) / 2014-08-11
+==================
+  * Update `is`, `covert`, `node.extend`
+
+[1.0.0](https://github.com/ljharb/node-json-file/releases/tag/v1.0.0) / 2014-08-07
+==================
+  * Update `tape`, `object-keys`, `is`, `node.extend`
+  * Add `npm run coverage` and `npm run lint`
+  * Updating tests
+
 [0.2.3](https://github.com/ljharb/node-json-file/releases/tag/v0.2.3) / 2013-12-07
 ==================
-  * ensure raw file contents are compared as a string - in node 0.6 and 0.8, it's a Buffer.
+  * ensure raw file contents are compared as a string - in node 0.6 and 0.8, it’s a Buffer.
   * Updating `tape`
   * Adding some badges to `README`
 
