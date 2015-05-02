@@ -39,7 +39,13 @@ JSONFile.prototype.save = function (callback) {
 	var indent = this.format.indent || 2;
 	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
 	var deferred = promiseback(callback);
-	fs.writeFile(this.filename, json, deferred.resolve);
+	fs.writeFile(this.filename, json, function (err, result) {
+		if (err) {
+			deferred.reject(err);
+		} else {
+			deferred.resolve(result);
+		}
+	});
 	return deferred.promise;
 };
 
