@@ -1,3 +1,10 @@
+[3.0.0](https://github.com/ljharb/node-json-file/releases/tag/v3.0.0) / 2015-05-03
+==================
+  * Make sure to reject the promise if writeFile errors (#7)
+  * All grade A-supported `node`/`iojs` versions now ship with an `npm` that understands `^`
+  * Speed up `travis-ci` builds; test on latest `node` and `io.js` versions
+  * Update `is`, `jscs`, `tape`
+
 [2.0.1](https://github.com/ljharb/node-json-file/releases/tag/v2.0.1) / 2015-02-06
 ==================
   * Update `is`, `tape`, `jscs`, `node.extend`, `object-keys`, `promiseback`
