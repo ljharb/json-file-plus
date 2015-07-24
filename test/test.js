@@ -1,3 +1,5 @@
+'use strict';
+
 var test = require('tape');
 var path = require('path');
 var jsonFile = require('../index');
@@ -23,12 +25,12 @@ var isFileNotFoundError = function (err) {
 
 test('requires a callback when arg is provided', function (t) {
 	t.plan(6);
-	t.throws(function () { jsonFile(testFilename, undefined); }, TypeError, 'requires a function');
-	t.throws(function () { jsonFile(testFilename, null); }, TypeError, 'requires a function');
-	t.throws(function () { jsonFile(testFilename, true); }, TypeError, 'requires a function');
-	t.throws(function () { jsonFile(testFilename, /a/g); }, TypeError, 'requires a function');
-	t.throws(function () { jsonFile(testFilename, []); }, TypeError, 'requires a function');
-	t.throws(function () { jsonFile(testFilename, {}); }, TypeError, 'requires a function');
+	t['throws'](function () { jsonFile(testFilename, undefined); }, TypeError, 'requires a function');
+	t['throws'](function () { jsonFile(testFilename, null); }, TypeError, 'requires a function');
+	t['throws'](function () { jsonFile(testFilename, true); }, TypeError, 'requires a function');
+	t['throws'](function () { jsonFile(testFilename, /a/g); }, TypeError, 'requires a function');
+	t['throws'](function () { jsonFile(testFilename, []); }, TypeError, 'requires a function');
+	t['throws'](function () { jsonFile(testFilename, {}); }, TypeError, 'requires a function');
 	t.end();
 });
 
@@ -64,7 +66,7 @@ test('returns an exception if the file has invalid JSON', function (t) {
 	t.plan(3);
 	jsonFile(__filename, function (err, file) {
 		t.ok(err instanceof SyntaxError, 'error is a SyntaxError');
-		t.equal(err.message, 'Unexpected token v', 'gives the expected error');
+		t.equal(err.message, 'Unexpected token \'', 'gives the expected error');
 		t.equal(file, undefined, 'file is undefined');
 		t.end();
 	});
@@ -83,10 +85,10 @@ test('format', function (t) {
 
 		t.test('no trailing newline', function (s1t) {
 			s1t.plan(3);
-			jsonFile(noNewlineFilename, function (err, file) {
-				s1t.error(err, 'no error');
-				s1t.notOk(file.format.trailing, 'reads no trailing newline');
-				s1t.equal(file.format.indent, '   ', 'reads three spaces');
+			jsonFile(noNewlineFilename, function (noErr, noNewlineFile) {
+				s1t.error(noErr, 'no error');
+				s1t.notOk(noNewlineFile.format.trailing, 'reads no trailing newline');
+				s1t.equal(noNewlineFile.format.indent, '   ', 'reads three spaces');
 				s1t.end();
 			});
 		});
@@ -119,11 +121,12 @@ test('#get(): with key, promise', function (st) {
 });
 
 test('#get(): with key, callback', function (st) {
-	st.plan(keys(testContents).length + 1);
+	st.plan(2 * keys(testContents).length + 1);
 	jsonFile(testFilename, function (err, file) {
 		st.error(err, 'no error');
 		forEach(testContents, function (keyContents, key) {
-			file.get(key, function (err, data) {
+			file.get(key, function (noError, data) {
+				st.error(noError, 'no error');
 				st.deepEqual(data, keyContents, 'data from callback get("' + key + '") matches');
 			});
 		});
@@ -143,10 +146,11 @@ test('#get(): without key, promise', function (s2t) {
 });
 
 test('#get(): without key, callback', function (s2t) {
-	s2t.plan(3);
-	jsonFile(testFilename, function (err, file) {
-		s2t.error(err, 'no error');
-		file.get(function (err, data) {
+	s2t.plan(4);
+	jsonFile(testFilename, function (noLoadError, file) {
+		s2t.error(noLoadError, 'no error');
+		file.get(function (noError, data) {
+			s2t.error(noError, 'no error');
 			s2t.deepEqual(data, file.data, 'data from async get() matches');
 			s2t.notEqual(data, file.data, 'data from async get() is not the same reference');
 			s2t.end();
@@ -178,21 +182,22 @@ test('#set(): setting invalid data', function (st) {
 	jsonFile(testFilename, function (err, file) {
 		st.error(err, 'no error');
 		var error = new TypeError('object must be a plain object');
-		st.throws(function () { return file.set(null); }, error, 'throws when given non-object');
-		st.throws(function () { return file.set(true); }, error, 'throws when given non-object');
-		st.throws(function () { return file.set([]); }, error, 'throws when given non-object');
-		st.throws(function () { return file.set(function () {}); }, error, 'throws when given non-object');
-		st.throws(function () { return file.set('foo'); }, error, 'throws when given non-object');
-		st.throws(function () { return file.set(/f/); }, error, 'throws when given non-object');
+		st['throws'](function () { return file.set(null); }, error, 'throws when given non-object');
+		st['throws'](function () { return file.set(true); }, error, 'throws when given non-object');
+		st['throws'](function () { return file.set([]); }, error, 'throws when given non-object');
+		st['throws'](function () { return file.set(function () {}); }, error, 'throws when given non-object');
+		st['throws'](function () { return file.set('foo'); }, error, 'throws when given non-object');
+		st['throws'](function () { return file.set(/f/); }, error, 'throws when given non-object');
 		st.end();
 	});
 });
 
 test('returns an error when no file', function (t) {
-	t.plan(3);
+	t.plan(4);
 	var filename = path.join(process.cwd(), 'does not exist.json');
 	jsonFile(filename, function (err, file) {
 		t.ok(err, 'error is truthy');
+		t.notOk(file, 'file is falsy');
 		t.ok(isFileNotFoundError(err), 'error number is correct');
 		var expectedError = {
 			errno: err.errno,
@@ -216,21 +221,22 @@ test('remembers filename', function (t) {
 });
 
 test('saves properly', function (t) {
-	t.plan(5);
-	jsonFile(testFilename, function (err, file) {
+	t.plan(6);
+	jsonFile(testFilename, function (noLoadError, file) {
+		t.error(noLoadError, 'no error');
 		t.equal(file.filename, testFilename, 'filename equals ' + testFilename);
 		file.set({ foo: !testContents.foo });
-		file.save(function (err) {
-			t.error(err, 'no error');
+		file.save(function (noError) {
+			t.error(noError, 'no error');
 			jsonFile(testFilename, function (err, file2) {
 				file2.get('foo').then(function (value) {
 					t.equal(value, !testContents.foo, 'value was properly saved');
 					file2.set({ foo: testContents.foo }); // restore original value
-					file2.save(function (err) {
-						t.error(err, 'save callback: no error');
+					file2.save(function (noSaveError) {
+						t.error(noSaveError, 'save callback: no error');
 					}).then(function () {
 						t.ok(true, 'save promise: success');
-					})['catch'](function (err) {
+					})['catch'](function () {
 						t.fail('save promise: error. should not be here.');
 					});
 				});

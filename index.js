@@ -1,5 +1,6 @@
+'use strict';
+
 var fs = require('fs');
-var path = require('path');
 var extend = require('node.extend');
 var is = require('is');
 var promiseback = require('promiseback');
@@ -61,14 +62,15 @@ var readJSON = function (filename) {
 	fs.readFile(filename, { encoding: 'utf8' }, function (err, raw) {
 		var file;
 
-		if (!err) {
-			try { file = new JSONFile(filename, raw); }
-			catch (e) { err = e; }
-		}
 		if (err) {
 			deferred.reject(err);
 		} else {
-			deferred.resolve(file);
+			try {
+				file = new JSONFile(filename, raw);
+				deferred.resolve(file);
+			} catch (e) {
+				deferred.reject(e);
+			}
 		}
 	});
 	return deferred.promise;
