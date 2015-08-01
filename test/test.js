@@ -10,9 +10,9 @@ var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
 var testContents = {
 	foo: 'bar',
-	null: null,
-	true: true,
-	false: false,
+	'null': null,
+	'true': true,
+	'false': false,
 	arr: [1, 2, 3],
 	obj: {
 		nested: {}

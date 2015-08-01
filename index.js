@@ -5,7 +5,7 @@ var extend = require('node.extend');
 var is = require('is');
 var promiseback = require('promiseback');
 
-var JSONFile = function (filename, raw) {
+var JSONFile = function JSONFile(filename, raw) {
 	var hasTrailingNewline = (/\n\n$/).test(raw);
 	var indentMatch = String(raw).match(/^[ \t]+/m);
 	var indent = indentMatch ? indentMatch[0] : 2;
