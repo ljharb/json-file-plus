@@ -49,8 +49,8 @@ test('returns an exception if the file is not found', function (t) {
 		t.ok(err, 'error is truthy');
 		t.ok(isFileNotFoundError(err), 'error number is correct');
 		var expectedError = {
-			errno: err.errno,
 			code: 'ENOENT',
+			errno: err.errno,
 			path: 'NOT A REAL FILE'
 		};
 		if (err.hasOwnProperty('syscall')) {
