@@ -55,7 +55,7 @@ jsonFile(filename, function (err, file) {
 Simply run `npm test` in the repo
 
 [npm-url]: https://npmjs.org/package/json-file-plus
-[npm-version-svg]: http://vb.teelaun.ch/ljharb/node-json-file.svg
+[npm-version-svg]: http://versionbadg.es/ljharb/node-json-file.svg
 [travis-svg]: https://travis-ci.org/ljharb/node-json-file.svg
 [travis-url]: https://travis-ci.org/ljharb/node-json-file
 [deps-svg]: https://david-dm.org/ljharb/node-json-file.svg
