@@ -50,7 +50,7 @@ JSONFile.prototype.save = function (callback) {
 	return deferred.promise;
 };
 
-var readJSON = function (filename) {
+var readJSON = function readJSON(filename) {
 	var callback;
 	if (arguments.length > 1) {
 		callback = arguments[1];
@@ -78,4 +78,3 @@ var readJSON = function (filename) {
 readJSON.JSONFile = JSONFile;
 
 module.exports = readJSON;
-
