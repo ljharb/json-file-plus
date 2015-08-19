@@ -1,3 +1,12 @@
+[3.0.1](https://github.com/ljharb/node-json-file/releases/tag/v3.0.1) / 2015-08-18
+==================
+  * [Docs] Switch from vb.teelaun.ch to versionbadg.es for the npm version badge SVG
+  * [Deps] update `node.extend`
+  * [Dev Deps] update `object-keys`, `covert`, `tape`, jscs`
+  * [Tests] up to `io.js` `v3.0`
+  * [Tests] add `npm run eslint` and `@ljharb/eslint-config`
+  * [Tests] add `npm run security`
+
 [3.0.0](https://github.com/ljharb/node-json-file/releases/tag/v3.0.0) / 2015-05-03
 ==================
   * Make sure to reject the promise if writeFile errors (#7)
