@@ -16,39 +16,45 @@ var jsonFile = require('json-file-plus');
 var path = require('path'); // in node-core
 var filename = path.join(process.cwd(), 'package.json');
 /* Note: jsonFile also returns a Promise, if you prefer that to a Node-style callback ("errorback"). */
-jsonFile(filename, function (err, file) {
-	if (err) { return doSomethingWithError(err); }
 
-	file.data; // Direct access to the data from the file
-	file.format; // extracted formatting data. change at will.
+var main = function (filename, callback) {
+	return jsonFile(filename, function (err, file) {
+		if (err) { return callback(err); }
 
-	file.get('version'); // get top-level keys. returns a Promise
-	file.get('version', callback); // get top-level keys. calls the errorback
-	file.get(); // get entire data. returns a Promise
-	file.get(callback); // get entire data. calls the errorback
+		file.data; // Direct access to the data from the file
+		file.format; // extracted formatting data. change at will.
 
-	/* pass any plain object into "set" to merge in a deep copy */
-	/* please note: references will be broken. */
-	/* if a non-plain object is passed, will throw a TypeError. */
-	file.set({
-		foo: 'bar',
-		bar: {
-			baz: true
-		}
+		file.get('version'); // get top-level keys. returns a Promise
+		// file.get('version', callback); // get top-level keys. calls the errorback
+		file.get(); // get entire data. returns a Promise
+		// file.get(callback); // get entire data. calls the errorback
+
+		/* pass any plain object into "set" to merge in a deep copy */
+		/* please note: references will be broken. */
+		/* if a non-plain object is passed, will throw a TypeError. */
+		file.set({
+			foo: 'bar',
+			bar: {
+				baz: true
+			}
+		});
+
+		/* change the filename if desired */
+		file.filename = path.join(process.cwd(), 'new-package.json');
+
+		/* Save the file, preserving formatting. */
+		/* Errorback will be passed to fs.writeFile */
+		/* Returns a Promise. */
+		file.save()
+			.then(callback)
+			.catch(callback)
 	});
+}
 
-	/* change the filename if desired */
-	file.filename = path.join(process.cwd(), 'new-package.json');
+main(filename, function (err) {
+	// console.log('done') // logs => 'done'
+})
 
-	/* Save the file, preserving formatting. */
-	/* Errorback will be passed to fs.writeFile */
-	/* Returns a Promise. */
-	file.save(fsWriteFileCallback).then(function () {
-		console.log('success!');
-	}).catch(function (err) {
-		console.log('error!', err);
-	});
-});
 ```
 
 ## Tests
@@ -67,4 +73,3 @@ Simply run `npm test` in the repo
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/json-file-plus.svg
 [downloads-url]: http://npm-stat.com/charts.html?package=json-file-plus
-
