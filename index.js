@@ -75,6 +75,20 @@ var readJSON = function readJSON(filename) {
 	});
 	return deferred.promise;
 };
+
+var readOrCreate = function readOrCreate(filename) {
+	return new promiseback.Deferred.Promise(function (resolve, reject) {
+		fs.readFile(filename, { encoding: 'utf8' }, function (err, raw) {
+			try {
+				resolve(new JSONFile(filename, err ? '{}' : raw));
+			} catch (e) {
+				reject(e);
+			}
+		});
+	});
+};
+
 readJSON.JSONFile = JSONFile;
+readJSON.readOrCreate = readOrCreate;
 
 module.exports = readJSON;
