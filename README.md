@@ -15,6 +15,8 @@ A module to read from and write to JSON files, without losing formatting, to min
 var jsonFile = require('json-file-plus');
 var path = require('path'); // in node-core
 var filename = path.join(process.cwd(), 'package.json');
+var callback = function (err, result) { /* your code here */ };
+
 /* Note: jsonFile also returns a Promise, if you prefer that to a Node-style callback ("errorback"). */
 jsonFile(filename, function (err, file) {
 	if (err) { return doSomethingWithError(err); }
@@ -43,7 +45,7 @@ jsonFile(filename, function (err, file) {
 	/* Save the file, preserving formatting. */
 	/* Errorback will be passed to fs.writeFile */
 	/* Returns a Promise. */
-	file.save(fsWriteFileCallback).then(function () {
+	file.save(callback).then(function () {
 		console.log('success!');
 	}).catch(function (err) {
 		console.log('error!', err);
