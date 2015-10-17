@@ -37,9 +37,9 @@
 		"foreach": "^2.0.5",
 		"object-keys": "^1.0.8",
 		"covert": "^1.1.0",
-		"jscs": "^2.3.3",
+		"jscs": "^2.3.4",
 		"eslint": "^1.7.1",
-		"@ljharb/eslint-config": "^1.4.0",
+		"@ljharb/eslint-config": "^1.4.1",
 		"nsp": "^1.1.0",
 		"evalmd": "^0.0.16"
 	},
