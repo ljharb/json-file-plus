@@ -9,14 +9,14 @@ var keys = require('object-keys');
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
 var testContents = {
+	arr: [1, 2, 3],
+	'false': false,
 	foo: 'bar',
 	'null': null,
-	'true': true,
-	'false': false,
-	arr: [1, 2, 3],
 	obj: {
 		nested: {}
-	}
+	},
+	'true': true
 };
 
 var isFileNotFoundError = function (err) {
@@ -200,8 +200,8 @@ test('returns an error when no file', function (t) {
 		t.notOk(file, 'file is falsy');
 		t.ok(isFileNotFoundError(err), 'error number is correct');
 		var expectedError = {
-			errno: err.errno,
 			code: 'ENOENT',
+			errno: err.errno,
 			path: filename
 		};
 		if (err.hasOwnProperty('syscall')) {

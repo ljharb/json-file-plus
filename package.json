@@ -33,13 +33,13 @@
 		"promiseback": "^2.0.1"
 	},
 	"devDependencies": {
-		"tape": "^4.2.0",
+		"tape": "^4.2.1",
 		"foreach": "^2.0.5",
-		"object-keys": "^1.0.7",
+		"object-keys": "^1.0.8",
 		"covert": "^1.1.0",
-		"jscs": "^2.1.1",
-		"eslint": "^1.5.0",
-		"@ljharb/eslint-config": "^1.2.0",
+		"jscs": "^2.3.3",
+		"eslint": "^1.7.1",
+		"@ljharb/eslint-config": "^1.4.0",
 		"nsp": "^1.1.0",
 		"evalmd": "^0.0.16"
 	},

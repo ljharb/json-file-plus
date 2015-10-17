@@ -117,6 +117,16 @@
 
 	"requirePaddingNewLinesAfterUseStrict": true,
 
-	"disallowArrowFunctions": true
+	"disallowArrowFunctions": true,
+
+	"disallowMultiLineTernary": true,
+
+	"validateOrderInObjectKeys": "asc-insensitive",
+
+	"disallowIdenticalDestructuringNames": true,
+
+	"disallowNestedTernaries": { "maxLevel": 1 },
+
+	"requireSpaceAfterComma": true
 }
 
