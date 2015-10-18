@@ -1,3 +1,11 @@
+[3.1.0](https://github.com/ljharb/node-json-file/releases/tag/v3.1.0) / 2015-10-17
+==================
+  * [New] Create `JSONData` and expose it, to separate "file" behavior from "json" behavior
+  * [Deps] update `is`, `promiseback`
+  * [Dev Deps] update `tape`, `jscs`, `eslint`, `@ljharb/eslint-config`, `nsp`, `object-keys`
+  * [Tests] up to `io.js` `v3.3`, `node` `v4.2`
+  * [Tests] Use `evalmd` to verify the README
+
 [3.0.1](https://github.com/ljharb/node-json-file/releases/tag/v3.0.1) / 2015-08-18
 ==================
   * [Docs] Switch from vb.teelaun.ch to versionbadg.es for the npm version badge SVG
