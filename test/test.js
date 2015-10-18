@@ -35,10 +35,11 @@ test('requires a callback when arg is provided', function (t) {
 });
 
 test('returns a file', function (t) {
-	t.plan(2);
+	t.plan(3);
 	jsonFile(testFilename, function (err, file) {
 		t.error(err, 'no error');
 		t.ok(file instanceof jsonFile.JSONFile, 'file is instance of JSONFile');
+		t.ok(file instanceof jsonFile.JSONData, 'file is instance of JSONData');
 		t.end();
 	});
 });

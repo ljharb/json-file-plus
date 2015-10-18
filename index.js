@@ -5,7 +5,7 @@ var extend = require('node.extend');
 var is = require('is');
 var promiseback = require('promiseback');
 
-var JSONFile = function JSONFile(filename, raw) {
+var JSONData = function JSONData(raw) {
 	var hasTrailingNewline = (/\n\n$/).test(raw);
 	var indentMatch = String(raw).match(/^[ \t]+/m);
 	var indent = indentMatch ? indentMatch[0] : 2;
@@ -14,10 +14,12 @@ var JSONFile = function JSONFile(filename, raw) {
 		indent: indent,
 		trailing: hasTrailingNewline
 	};
-	this.filename = filename;
-	this.data = JSON.parse(raw);
+	if (raw) {
+		this.data = JSON.parse(raw);
+	}
 };
-JSONFile.prototype.get = function (key, callback) {
+
+JSONData.prototype.get = function (key, callback) {
 	var data = extend({}, this.data);
 	if (is.fn(key)) {
 		callback = key;
@@ -31,16 +33,25 @@ JSONFile.prototype.get = function (key, callback) {
 	deferred.resolve(value);
 	return deferred.promise;
 };
-JSONFile.prototype.set = function (obj) {
+JSONData.prototype.set = function (obj) {
 	if (!is.hash(obj)) { throw new TypeError('object must be a plain object'); }
 	extend(true, this.data, obj);
 };
-JSONFile.prototype.save = function (callback) {
+JSONData.prototype.stringify = function stringify() {
 	var endingNewlines = this.format.trailing ? '\n\n' : '\n';
 	var indent = this.format.indent || 2;
-	var json = new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
+	return new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
+};
+
+var JSONFile = function JSONFile(filename, raw) {
+	JSONData.call(this, raw);
+	this.filename = filename;
+};
+JSONFile.prototype = new JSONData();
+
+JSONFile.prototype.save = function (callback) {
 	var deferred = promiseback(callback);
-	fs.writeFile(this.filename, json, function (err, result) {
+	fs.writeFile(this.filename, this.stringify(), function (err, result) {
 		if (err) {
 			deferred.reject(err);
 		} else {
@@ -76,5 +87,6 @@ var readJSON = function readJSON(filename) {
 	return deferred.promise;
 };
 readJSON.JSONFile = JSONFile;
+readJSON.JSONData = JSONData;
 
 module.exports = readJSON;
