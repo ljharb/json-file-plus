@@ -19,8 +19,10 @@ var testContents = {
 	'true': true
 };
 
+var NODE_011_NOT_FOUND = -2;
+var NODE_010_NOT_FOUND = 34;
 var isFileNotFoundError = function (err) {
-	return [34, -2].indexOf(err.errno) > -1;
+	return [NODE_010_NOT_FOUND, NODE_011_NOT_FOUND].indexOf(err.errno) > -1;
 };
 
 test('requires a callback when arg is provided', function (t) {
