@@ -1,3 +1,7 @@
+[3.2.0](https://github.com/ljharb/node-json-file/releases/tag/v3.1.0) / 2015-10-17
+==================
+  * [New] Add `readJSON.sync`, and `JSONFile#saveSync`, for command line scripts
+
 [3.1.0](https://github.com/ljharb/node-json-file/releases/tag/v3.1.0) / 2015-10-17
 ==================
   * [New] Create `JSONData` and expose it, to separate "file" behavior from "json" behavior
