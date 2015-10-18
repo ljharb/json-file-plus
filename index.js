@@ -61,6 +61,10 @@ JSONFile.prototype.save = function (callback) {
 	return deferred.promise;
 };
 
+JSONFile.prototype.saveSync = function () {
+	fs.writeFileSync(this.filename, this.stringify());
+};
+
 var readJSON = function readJSON(filename) {
 	var callback;
 	if (arguments.length > 1) {
@@ -86,6 +90,14 @@ var readJSON = function readJSON(filename) {
 	});
 	return deferred.promise;
 };
+
+var readJSONSync = function readJSONSync(filename) {
+	var raw = fs.readFileSync(filename, 'utf8');
+	return new JSONFile(filename, raw);
+};
+
+readJSON.sync = readJSONSync;
+
 readJSON.JSONFile = JSONFile;
 readJSON.JSONData = JSONData;
 

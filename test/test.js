@@ -248,3 +248,25 @@ test('saves properly', function (t) {
 	});
 });
 
+test('#saveSync', function (t) {
+	var file = jsonFile.sync(testFilename);
+	file.set({ foo: !testContents.foo });
+	try {
+		file.saveSync();
+		t.ok(true, 'saveSync: success');
+	} finally {
+		file.set({ foo: testContents.foo });
+		file.saveSync();
+		t.ok(true, 'saveSync, restore original: success');
+		t.end();
+	}
+});
+
+test('sync', function (t) {
+	t['throws'](function () { jsonFile.sync('not a filename'); }, 'nonexistent filename throws');
+	var file = jsonFile.sync(testFilename);
+	t.deepEqual(file.data, testContents, 'sync file data is expected data');
+	t.equal(true, file instanceof jsonFile.JSONFile, 'file is JSONFile');
+	t.equal(true, file instanceof jsonFile.JSONData, 'file is JSONData');
+	t.end();
+});
