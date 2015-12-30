@@ -38,6 +38,8 @@ jsonFile(filename, function (err, file) {
 			baz: true
 		}
 	});
+	
+	file.remove('description'); // remove a specific key-value pair
 
 	/* change the filename if desired */
 	file.filename = path.join(process.cwd(), 'new-package.json');
