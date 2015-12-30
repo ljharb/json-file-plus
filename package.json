@@ -17,7 +17,8 @@
 	"license": "MIT",
 	"main": "index.js",
 	"scripts": {
-		"test": "npm run lint && evalmd README.md && node test/test.js && npm run security",
+		"test": "npm run lint && evalmd README.md && npm run tests-only && npm run security",
+		"tests-only": "node test/test.js",
 		"coverage": "covert test/test.js",
 		"coverage-quiet": "covert test/test.js --quiet",
 		"lint": "npm run jscs && npm run eslint",
