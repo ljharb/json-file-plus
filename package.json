@@ -45,14 +45,14 @@
 		"promiseback": "^2.0.2"
 	},
 	"devDependencies": {
-		"tape": "^4.2.1",
+		"tape": "^4.4.0",
 		"foreach": "^2.0.5",
-		"object-keys": "^1.0.8",
+		"object-keys": "^1.0.9",
 		"covert": "^1.1.0",
-		"jscs": "^2.3.4",
-		"eslint": "^1.7.1",
-		"@ljharb/eslint-config": "^1.4.1",
-		"nsp": "^2.0.0",
+		"jscs": "^2.7.0",
+		"eslint": "^1.10.3",
+		"@ljharb/eslint-config": "^1.6.1",
+		"nsp": "^2.2.0",
 		"evalmd": "^0.0.16"
 	},
 	"engines": {
