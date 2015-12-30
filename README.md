@@ -39,7 +39,8 @@ jsonFile(filename, function (err, file) {
 		}
 	});
 	
-	file.remove('description'); // remove a specific key-value pair
+	file.remove('description'); // remove a specific key-value pair. returns a Promise
+	file.remove('description', callback); // remove a specific key-value pair. calls the errorback
 
 	/* change the filename if desired */
 	file.filename = path.join(process.cwd(), 'new-package.json');
