@@ -5,6 +5,7 @@ var path = require('path');
 var jsonFile = require('../index');
 var forEach = require('foreach');
 var keys = require('object-keys');
+var Promise = require('promiseback').Deferred.Promise;
 
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
@@ -159,6 +160,46 @@ test('#get(): without key, callback', function (s2t) {
 			s2t.end();
 		});
 	});
+});
+
+test('#remove()', function (st) {
+	st.test('with key, callback', function (s2t) {
+		s2t.plan(4);
+		jsonFile(testFilename, function (noLoadError, file) {
+			s2t.ifError(noLoadError, 'no error');
+			file.remove('arr', function (noError, result) {
+				s2t.ifError(noError, 'no error');
+				s2t.equal(result, undefined, 'deletion successful');
+				s2t.equal('arr' in file.data, false, 'key removed from data');
+				s2t.end();
+			});
+		});
+	});
+
+	st.test('with key, promise', function (s2t) {
+		s2t.plan(2);
+		jsonFile(testFilename).then(function (file) {
+			return Promise.all([file, file.remove('arr')]);
+		}).then(function (results) {
+			var file = results[0];
+			var result = results[1];
+			s2t.equal(result, undefined, 'deletion successful');
+			s2t.equal('arr' in file.data, false, 'key removed from data');
+			s2t.end();
+		})['catch'](s2t.fail);
+	});
+
+	st.test('with an empty key', function (s2t) {
+		s2t.plan(1);
+		jsonFile(testFilename).then(function (file) {
+			return file.remove('');
+		}).then(s2t.fail)['catch'](function (err) {
+			s2t.equal(err instanceof TypeError, true, 'err is TypeError');
+			s2t.end();
+		});
+	});
+
+	st.end();
 });
 
 test('#set()', function (t) {

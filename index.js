@@ -4,6 +4,13 @@ var fs = require('fs');
 var extend = require('node.extend');
 var is = require('is');
 var promiseback = require('promiseback');
+var Promise = promiseback.Deferred.Promise;
+
+var checkKey = function checkKey(key) {
+	if ((typeof key !== 'string' || key.length === 0) && typeof key !== 'symbol') {
+		throw new TypeError('key must be a Symbol, or a nonempty string');
+	}
+};
 
 var JSONData = function JSONData(raw) {
 	var hasTrailingNewline = (/\n\n$/).test(raw);
@@ -33,10 +40,24 @@ JSONData.prototype.get = function (key, callback) {
 	deferred.resolve(value);
 	return deferred.promise;
 };
+
 JSONData.prototype.set = function (obj) {
 	if (!is.hash(obj)) { throw new TypeError('object must be a plain object'); }
 	extend(true, this.data, obj);
 };
+
+JSONData.prototype.remove = function (key, callback) {
+	var data = this.data;
+	var deletion = Promise.resolve().then(function () {
+		checkKey(key);
+		var status = delete data[key];
+		if (!status) {
+			return Promise.reject(new Error('deletion failed'));
+		}
+	});
+	return promiseback(deletion, callback);
+};
+
 JSONData.prototype.stringify = function stringify() {
 	var endingNewlines = this.format.trailing ? '\n\n' : '\n';
 	var indent = this.format.indent || 2;
