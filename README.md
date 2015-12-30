@@ -57,13 +57,13 @@ jsonFile(filename, function (err, file) {
 Simply run `npm test` in the repo
 
 [npm-url]: https://npmjs.org/package/json-file-plus
-[npm-version-svg]: http://versionbadg.es/ljharb/node-json-file.svg
-[travis-svg]: https://travis-ci.org/ljharb/node-json-file.svg
-[travis-url]: https://travis-ci.org/ljharb/node-json-file
-[deps-svg]: https://david-dm.org/ljharb/node-json-file.svg
-[deps-url]: https://david-dm.org/ljharb/node-json-file
-[dev-deps-svg]: https://david-dm.org/ljharb/node-json-file/dev-status.svg
-[dev-deps-url]: https://david-dm.org/ljharb/node-json-file#info=devDependencies
+[npm-version-svg]: http://versionbadg.es/ljharb/json-file-plus.svg
+[travis-svg]: https://travis-ci.org/ljharb/json-file-plus.svg
+[travis-url]: https://travis-ci.org/ljharb/json-file-plus
+[deps-svg]: https://david-dm.org/ljharb/json-file-plus.svg
+[deps-url]: https://david-dm.org/ljharb/json-file-plus
+[dev-deps-svg]: https://david-dm.org/ljharb/json-file-plus/dev-status.svg
+[dev-deps-url]: https://david-dm.org/ljharb/json-file-plus#info=devDependencies
 [npm-badge-png]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
 [license-image]: http://img.shields.io/npm/l/json-file-plus.svg
 [license-url]: LICENSE
