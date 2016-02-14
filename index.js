@@ -54,6 +54,7 @@ JSONData.prototype.remove = function (key, callback) {
 		if (!status) {
 			return Promise.reject(new Error('deletion failed'));
 		}
+		return void 0;
 	});
 	return promiseback(deletion, callback);
 };
