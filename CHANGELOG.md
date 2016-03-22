@@ -1,4 +1,13 @@
-[3.2.0](https://github.com/ljharb/json-file-plus/releases/tag/v3.1.0) / 2015-10-17
+[3.3.0](https://github.com/ljharb/json-file-plus/releases/tag/v3.3.0) / 2016-03-22
+==================
+  * [New] Add `JSONData#remove` (#16)
+  * [Dev Deps] update `tape`, `object-keys`, `jscs`, `eslint`, `@ljharb/eslint-config`, `nsp`
+  * Rename repo to `json-file-plus` (#15)
+  * [Tests] up to `node` `v5.9`, `v4.4`
+  * [Tests] fix npm upgrades on older nodes
+  * [Tests] Use pretest/posttest for linting/security
+
+[3.2.0](https://github.com/ljharb/json-file-plus/releases/tag/v3.2.0) / 2015-10-17
 ==================
   * [New] Add `readJSON.sync`, and `JSONFile#saveSync`, for command line scripts
 
