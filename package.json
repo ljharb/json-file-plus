@@ -54,7 +54,7 @@
 		"jscs": "^2.11.0",
 		"eslint": "^2.4.0",
 		"@ljharb/eslint-config": "^2.1.1",
-		"nsp": "^2.2.1",
+		"nsp": "^2.2.2",
 		"evalmd": "^0.0.16"
 	},
 	"engines": {
