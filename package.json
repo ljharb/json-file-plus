@@ -18,12 +18,12 @@
 	"main": "index.js",
 	"scripts": {
 		"pretest": "npm run --silent lint && evalmd README.md",
-		"test": "npm run tests-only",
+		"test": "npm run --silent tests-only",
 		"tests-only": "node test/test.js",
 		"posttest": "npm run --silent security",
 		"coverage": "covert test/test.js",
 		"coverage-quiet": "covert test/test.js --quiet",
-		"lint": "npm run jscs && npm run eslint",
+		"lint": "npm run --silent jscs && npm run --silent eslint",
 		"eslint": "eslint *.js test/*.js",
 		"jscs": "jscs *.js test/*.js",
 		"security": "nsp check"
