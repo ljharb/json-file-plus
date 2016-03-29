@@ -52,9 +52,9 @@
 		"object-keys": "^1.0.9",
 		"covert": "^1.1.0",
 		"jscs": "^2.11.0",
-		"eslint": "^2.4.0",
-		"@ljharb/eslint-config": "^2.1.1",
-		"nsp": "^2.2.1",
+		"eslint": "^2.5.3",
+		"@ljharb/eslint-config": "^2.2.0",
+		"nsp": "^2.2.2",
 		"evalmd": "^0.0.16"
 	},
 	"engines": {
