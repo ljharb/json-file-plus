@@ -55,7 +55,7 @@
 		"eslint": "^2.5.3",
 		"@ljharb/eslint-config": "^2.2.0",
 		"nsp": "^2.2.2",
-		"evalmd": "^0.0.16"
+		"evalmd": "^0.0.17"
 	},
 	"engines": {
 		"node": ">= 0.4"
