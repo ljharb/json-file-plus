@@ -52,10 +52,10 @@
 		"object-keys": "^1.0.9",
 		"covert": "^1.1.0",
 		"jscs": "^2.11.0",
-		"eslint": "^2.5.3",
+		"eslint": "^2.6.0",
 		"@ljharb/eslint-config": "^2.2.0",
-		"nsp": "^2.2.2",
-		"evalmd": "^0.0.16"
+		"nsp": "^2.3.0",
+		"evalmd": "^0.0.17"
 	},
 	"engines": {
 		"node": ">= 0.4"
