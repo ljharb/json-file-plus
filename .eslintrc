@@ -5,7 +5,6 @@
 
 	"rules": {
 		"dot-notation": [2, { "allowKeywords": false }],
-		"max-nested-callbacks": [2, 6],
 		"no-magic-numbers": [0],
 		"no-param-reassign": [1]
 	}
