@@ -42,7 +42,9 @@ JSONData.prototype.get = function (key, callback) {
 };
 
 JSONData.prototype.set = function (obj) {
-	if (!is.hash(obj)) { throw new TypeError('object must be a plain object'); }
+	if (!is.hash(obj)) {
+		throw new TypeError('object must be a plain object');
+	}
 	extend(true, this.data, obj);
 };
 

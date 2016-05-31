@@ -6,6 +6,7 @@ var jsonFile = require('../index');
 var forEach = require('foreach');
 var keys = require('object-keys');
 var Promise = require('promiseback').Deferred.Promise;
+var has = require('has');
 
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
@@ -57,7 +58,7 @@ test('returns an exception if the file is not found', function (t) {
 			errno: err.errno,
 			path: 'NOT A REAL FILE'
 		};
-		if (err.hasOwnProperty('syscall')) {
+		if (has(err, 'syscall')) {
 			expectedError.syscall = 'open';
 		}
 		t.deepEqual(err, expectedError, 'returns an error');
@@ -248,7 +249,7 @@ test('returns an error when no file', function (t) {
 			errno: err.errno,
 			path: filename
 		};
-		if (err.hasOwnProperty('syscall')) {
+		if (has(err, 'syscall')) {
 			expectedError.syscall = 'open';
 		}
 		t.deepEqual(err, expectedError, 'returned an error');
