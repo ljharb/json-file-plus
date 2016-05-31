@@ -68,10 +68,12 @@ test('returns an exception if the file is not found', function (t) {
 });
 
 test('returns an exception if the file has invalid JSON', function (t) {
-	t.plan(3);
+	t.plan(4);
 	jsonFile(__filename, function (err, file) {
 		t.ok(err instanceof SyntaxError, 'error is a SyntaxError');
-		t.equal(err.message, 'Unexpected token \'', 'gives the expected error');
+		t.equal(typeof err.message, 'string', 'err.message is a string');
+		var expected = 'Unexpected token \'';
+		t.equal(err.message.slice(0, expected.length), expected, 'gives the expected error');
 		t.equal(file, undefined, 'file is undefined');
 		t.end();
 	});
