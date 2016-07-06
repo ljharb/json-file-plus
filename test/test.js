@@ -15,9 +15,7 @@ var testContents = {
 	'false': false,
 	foo: 'bar',
 	'null': null,
-	obj: {
-		nested: {}
-	},
+	obj: { nested: {} },
 	'true': true
 };
 
@@ -128,7 +126,7 @@ test('#get(): with key, promise', function (st) {
 });
 
 test('#get(): with key, callback', function (st) {
-	st.plan(2 * keys(testContents).length + 1);
+	st.plan((2 * keys(testContents).length) + 1);
 	jsonFile(testFilename, function (err, file) {
 		st.error(err, 'no error');
 		forEach(testContents, function (keyContents, key) {
