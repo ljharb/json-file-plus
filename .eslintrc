@@ -5,7 +5,8 @@
 
 	"rules": {
 		"dot-notation": [2, { "allowKeywords": false }],
-		"no-magic-numbers": [0],
-		"no-param-reassign": [1]
+		"func-name-matching": 1,
+		"no-magic-numbers": 0,
+		"no-param-reassign": 1
 	}
 }
