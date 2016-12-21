@@ -54,7 +54,7 @@ test('returns an exception if the file is not found', function (t) {
 		var expectedError = {
 			code: 'ENOENT',
 			errno: err.errno,
-			path: 'NOT A REAL FILE'
+			path: path.resolve('NOT A REAL FILE')
 		};
 		if (has(err, 'syscall')) {
 			expectedError.syscall = 'open';

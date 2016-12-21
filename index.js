@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 var extend = require('node.extend');
 var is = require('is');
 var promiseback = require('promiseback');
@@ -98,7 +99,7 @@ var readJSON = function readJSON(filename) {
 		}
 	}
 	var deferred = promiseback(callback);
-	fs.readFile(filename, { encoding: 'utf8' }, function (err, raw) {
+	fs.readFile(path.resolve(filename), { encoding: 'utf8' }, function (err, raw) {
 		var file;
 
 		if (err) {
