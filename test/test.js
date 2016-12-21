@@ -21,8 +21,13 @@ var testContents = {
 
 var NODE_011_NOT_FOUND = -2;
 var NODE_010_NOT_FOUND = 34;
+var WINDOWS_NODE_7_NOT_FOUND = -4058;
 var isFileNotFoundError = function (err) {
-	return [NODE_010_NOT_FOUND, NODE_011_NOT_FOUND].indexOf(err.errno) > -1;
+	return [
+		NODE_010_NOT_FOUND,
+		NODE_011_NOT_FOUND,
+		WINDOWS_NODE_7_NOT_FOUND
+	].indexOf(err.errno) > -1;
 };
 
 test('requires a callback when arg is provided', function (t) {
