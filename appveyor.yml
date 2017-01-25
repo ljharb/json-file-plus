@@ -15,10 +15,9 @@ environment:
     - nodejs_version: "0.10"
     - nodejs_version: "0.8"
     - nodejs_version: "0.6"
-matrix:
+# matrix:
   # fast_finish: true
-  allow_failures:
-    - nodejs_version: "0.6"
+  # allow_failures:
 
 platform:
   - x86
@@ -27,9 +26,9 @@ platform:
 # Install scripts. (runs after repo cloning)
 install:
  # Get the latest stable version of Node.js or io.js
- - ps: if ($env:nodejs_version -ne '0.6') { Install-Product node $env:nodejs_version $env:platform }
- - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:platform
+ - ps: Install-Product node $env:nodejs_version $env:platform
  - set PATH=%APPDATA%\npm;%PATH%
+ - IF %nodejs_version% EQU 0.6 npm config set ca ""
  - IF %nodejs_version% EQU 0.6 npm -g install npm@1.3
  - IF %nodejs_version% EQU 0.8 npm -g install npm@2
  - set PATH=%APPDATA%\npm;%PATH%
