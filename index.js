@@ -3,6 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var extend = require('node.extend');
+var assign = require('object.assign');
 var is = require('is');
 var promiseback = require('promiseback');
 var Promise = promiseback.Deferred.Promise;
@@ -28,14 +29,14 @@ var JSONData = function JSONData(raw) {
 };
 
 JSONData.prototype.get = function (key, callback) {
-	var data = extend({}, this.data);
+	var data = assign({}, this.data);
 	if (is.fn(key)) {
 		callback = key;
 		key = null;
 	}
 	var value = key ? data[key] : data;
 	if (is.hash(value)) {
-		value = extend({}, value);
+		value = assign({}, value);
 	}
 	var deferred = promiseback(callback);
 	deferred.resolve(value);
