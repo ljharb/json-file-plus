@@ -65,6 +65,7 @@ JSONData.prototype.remove = function (key, callback) {
 JSONData.prototype.stringify = function stringify() {
 	var endingNewlines = this.format.trailing ? '\n\n' : '\n';
 	var indent = this.format.indent || 2;
+	// eslint-disable-next-line no-buffer-constructor
 	return new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
 };
 

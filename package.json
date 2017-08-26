@@ -48,19 +48,18 @@
 		"promiseback": "^2.0.2"
 	},
 	"devDependencies": {
-		"tape": "^4.6.3",
-		"foreach": "^2.0.5",
-		"object-keys": "^1.0.11",
+		"@ljharb/eslint-config": "^12.2.1",
 		"covert": "^1.1.0",
-		"jscs": "^3.0.7",
-		"eslint": "^3.16.0",
-		"@ljharb/eslint-config": "^11.0.0",
-		"nsp": "^2.6.2",
+		"eslint": "^4.5.0",
 		"evalmd": "^0.0.17",
-		"has": "^1.0.1"
+		"foreach": "^2.0.5",
+		"has": "^1.0.1",
+		"jscs": "^3.0.7",
+		"nsp": "^2.7.0",
+		"object-keys": "^1.0.11",
+		"tape": "^4.8.0"
 	},
 	"engines": {
 		"node": ">= 0.4"
 	}
 }
-
