@@ -51,14 +51,14 @@
 	"devDependencies": {
 		"@ljharb/eslint-config": "^12.2.1",
 		"covert": "^1.1.0",
-		"eslint": "^4.11.0",
+		"eslint": "^4.19.0",
 		"evalmd": "^0.0.17",
 		"foreach": "^2.0.5",
 		"has": "^1.0.1",
 		"jscs": "^3.0.7",
-		"nsp": "^3.1.0",
+		"nsp": "^3.2.1",
 		"object-keys": "^1.0.11",
-		"tape": "^4.8.0"
+		"tape": "^4.9.0"
 	},
 	"engines": {
 		"node": ">= 0.4"
