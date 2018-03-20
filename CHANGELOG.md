@@ -1,3 +1,12 @@
+[3.3.1](https://github.com/ljharb/json-file-plus/releases/tag/v3.3.1) / 2018-03-20
+==================
+  * [Fix] resolve the path before passing it into `fs.readFile`, so the error has a normalized path
+  * [Fix] use `safer-buffer` instead of `Buffer` constructor
+  * [Refactor] add `object.assign`
+  * [Deps] update `is`, `node.extend`
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `nsp`, `evalmd`, `jscs`, `object-keys`, `tape`
+  * [Tests] up to `node` `v9.8`, `v8.10`, `v6.13`; use `nvm install-latest-npm`; pin included builds to LTS
+
 [3.3.0](https://github.com/ljharb/json-file-plus/releases/tag/v3.3.0) / 2016-03-22
 ==================
   * [New] Add `JSONData#remove` (#16)
