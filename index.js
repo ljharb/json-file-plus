@@ -7,6 +7,7 @@ var assign = require('object.assign');
 var is = require('is');
 var promiseback = require('promiseback');
 var Promise = promiseback.Deferred.Promise;
+var Buffer = require('safer-buffer').Buffer;
 
 var checkKey = function checkKey(key) {
 	if ((typeof key !== 'string' || key.length === 0) && typeof key !== 'symbol') {
@@ -66,8 +67,7 @@ JSONData.prototype.remove = function (key, callback) {
 JSONData.prototype.stringify = function stringify() {
 	var endingNewlines = this.format.trailing ? '\n\n' : '\n';
 	var indent = this.format.indent || 2;
-	// eslint-disable-next-line no-buffer-constructor
-	return new Buffer(JSON.stringify(this.data, null, indent) + endingNewlines);
+	return Buffer.from(JSON.stringify(this.data, null, indent) + endingNewlines);
 };
 
 var JSONFile = function JSONFile(filename, raw) {
