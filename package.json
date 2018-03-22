@@ -47,7 +47,7 @@
 		"node.extend": "^2.0.0",
 		"object.assign": "^4.1.0",
 		"promiseback": "^2.0.2",
-		"safer-buffer": "^2.0.2"
+		"safer-buffer": "^2.1.0"
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^12.2.1",
