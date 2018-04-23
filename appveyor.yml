@@ -30,8 +30,8 @@ install:
  - ps: if ($env:nodejs_version -ne '0.6') { Install-Product node $env:nodejs_version $env:platform }
  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:platform
  - set PATH=%APPDATA%\npm;%PATH%
- - IF %nodejs_version% EQU 0.6 npm -g install npm@1.3
- - IF %nodejs_version% EQU 0.8 npm -g install npm@2
+ - IF %nodejs_version% EQU 0.6 npm set strict-ssl false && npm -g install npm@1.3
+ - IF %nodejs_version% EQU 0.8 npm set strict-ssl false && npm -g install npm@2
  - set PATH=%APPDATA%\npm;%PATH%
  #- IF %nodejs_version% NEQ 0.6 AND %nodejs_version% NEQ 0.8 npm -g install npm
  # install modules
