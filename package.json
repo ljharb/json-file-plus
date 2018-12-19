@@ -20,12 +20,14 @@
 		"pretest": "npm run --silent lint",
 		"test": "npm run --silent tests-only",
 		"tests-only": "node test/test.js",
-		"posttest": "npm run --silent security",
+		"posttest": "npm run audit",
 		"coverage": "covert test/test.js",
 		"coverage-quiet": "covert test/test.js --quiet",
 		"prelint": "evalmd README.md",
 		"lint": "eslint *.js test/*.js",
-		"security": "nsp check"
+		"preaudit": "npm install --package-lock --package-lock-only",
+		"audit": "npm audit",
+		"postaudit": "rm package-lock.json"
 	},
 	"repository": {
 		"type": "git",
