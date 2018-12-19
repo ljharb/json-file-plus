@@ -24,9 +24,7 @@
 		"coverage": "covert test/test.js",
 		"coverage-quiet": "covert test/test.js --quiet",
 		"prelint": "evalmd README.md",
-		"lint": "npm run --silent jscs && npm run --silent eslint",
-		"eslint": "eslint *.js test/*.js",
-		"jscs": "jscs *.js test/*.js",
+		"lint": "eslint *.js test/*.js",
 		"security": "nsp check"
 	},
 	"repository": {
@@ -56,7 +54,6 @@
 		"evalmd": "^0.0.17",
 		"foreach": "^2.0.5",
 		"has": "^1.0.1",
-		"jscs": "^3.0.7",
 		"nsp": "^3.2.1",
 		"object-keys": "^1.0.11",
 		"tape": "^4.9.0"
