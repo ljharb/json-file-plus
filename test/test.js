@@ -84,6 +84,7 @@ test('returns an exception if the file has invalid JSON', function (t) {
 
 test('format', function (t) {
 	t.plan(5);
+
 	jsonFile(testFilename, function (err, file) {
 		t.error(err, 'no error');
 		t.equal(file.format.indent, '\t', 'reads tabs');
@@ -93,16 +94,15 @@ test('format', function (t) {
 			trailing: true
 		}, 'entire format is properly read');
 
-		t.test('no trailing newline', function (s1t) {
-			s1t.plan(3);
+		t.test('no trailing newline', function (st) {
+			st.plan(3);
 			jsonFile(noNewlineFilename, function (noErr, noNewlineFile) {
-				s1t.error(noErr, 'no error');
-				s1t.notOk(noNewlineFile.format.trailing, 'reads no trailing newline');
-				s1t.equal(noNewlineFile.format.indent, '   ', 'reads three spaces');
-				s1t.end();
+				st.error(noErr, 'no error');
+				st.notOk(noNewlineFile.format.trailing, 'reads no trailing newline');
+				st.equal(noNewlineFile.format.indent, '   ', 'reads three spaces');
+				st.end();
 			});
 		});
-		t.end();
 	});
 });
 
