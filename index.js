@@ -30,6 +30,7 @@ var JSONData = function JSONData(raw) {
 };
 
 JSONData.prototype.get = function (key, callback) {
+	/* eslint no-param-reassign: 0 */
 	var data = assign({}, this.data);
 	if (is.fn(key)) {
 		callback = key;

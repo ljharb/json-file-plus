@@ -24,7 +24,7 @@
 		"coverage": "covert test/test.js",
 		"coverage-quiet": "covert test/test.js --quiet",
 		"prelint": "evalmd README.md",
-		"lint": "eslint *.js test/*.js"
+		"lint": "eslint ."
 	},
 	"repository": {
 		"type": "git",
@@ -47,14 +47,14 @@
 		"safer-buffer": "^2.1.2"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^13.1.1",
+		"@ljharb/eslint-config": "^14.1.0",
 		"covert": "^1.1.1",
-		"eslint": "^5.13.0",
-		"evalmd": "^0.0.17",
+		"eslint": "^6.4.0",
+		"evalmd": "^0.0.19",
 		"foreach": "^2.0.5",
 		"has": "^1.0.3",
-		"object-keys": "^1.0.12",
-		"tape": "^4.10.0"
+		"object-keys": "^1.1.1",
+		"tape": "^4.11.0"
 	},
 	"engines": {
 		"node": ">= 0.4"

@@ -89,10 +89,11 @@ test('format', function (t) {
 		t.error(err, 'no error');
 		t.equal(file.format.indent, '\t', 'reads tabs');
 		t.equal(file.format.trailing, true, 'reads trailing newline');
-		t.deepEqual(file.format, {
-			indent: '\t',
-			trailing: true
-		}, 'entire format is properly read');
+		t.deepEqual(
+			file.format,
+			{ indent: '\t', trailing: true },
+			'entire format is properly read'
+		);
 
 		t.test('no trailing newline', function (st) {
 			st.plan(3);
