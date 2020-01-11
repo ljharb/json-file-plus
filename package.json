@@ -22,10 +22,9 @@
 	"scripts": {
 		"pretest": "npm run --silent lint",
 		"test": "npm run --silent tests-only",
-		"tests-only": "node test/test.js",
+		"tests-only": "node test",
 		"posttest": "npx aud",
-		"coverage": "covert test/test.js",
-		"coverage-quiet": "covert test/test.js --quiet",
+		"coverage": "covert test/index.js",
 		"prelint": "evalmd README.md",
 		"lint": "eslint ."
 	},
