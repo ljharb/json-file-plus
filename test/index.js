@@ -7,6 +7,7 @@ var forEach = require('foreach');
 var keys = require('object-keys');
 var Promise = require('promiseback').Deferred.Promise;
 var has = require('has');
+var assign = require('object.assign');
 
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
@@ -28,6 +29,19 @@ var isFileNotFoundError = function (err) {
 		NODE_011_NOT_FOUND,
 		WINDOWS_NODE_7_NOT_FOUND
 	].indexOf(err.errno) > -1;
+};
+
+var enoent = function enoent(err, filename) {
+	var message = 'ENOENT' + (err.message.indexOf('no such file or directory') === 8 ? ': no such file or directory' : '') + ', open \'' + filename + "'";
+	var expectedError = assign(new Error(message), {
+		code: 'ENOENT',
+		errno: err.errno,
+		path: filename
+	});
+	if (has(err, 'syscall')) {
+		expectedError.syscall = 'open';
+	}
+	return expectedError;
 };
 
 test('requires a callback when arg is provided', function (t) {
@@ -56,15 +70,7 @@ test('returns an exception if the file is not found', function (t) {
 	jsonFile('NOT A REAL FILE', function (err, file) {
 		t.ok(err, 'error is truthy');
 		t.ok(isFileNotFoundError(err), 'error number is correct');
-		var expectedError = {
-			code: 'ENOENT',
-			errno: err.errno,
-			path: path.resolve('NOT A REAL FILE')
-		};
-		if (has(err, 'syscall')) {
-			expectedError.syscall = 'open';
-		}
-		t.deepEqual(err, expectedError, 'returns an error');
+		t.deepEqual(err, enoent(err, path.resolve('NOT A REAL FILE')), 'returns an error');
 		t.equal(file, undefined, 'file is undefined');
 		t.end();
 	});
@@ -250,15 +256,7 @@ test('returns an error when no file', function (t) {
 		t.ok(err, 'error is truthy');
 		t.notOk(file, 'file is falsy');
 		t.ok(isFileNotFoundError(err), 'error number is correct');
-		var expectedError = {
-			code: 'ENOENT',
-			errno: err.errno,
-			path: filename
-		};
-		if (has(err, 'syscall')) {
-			expectedError.syscall = 'open';
-		}
-		t.deepEqual(err, expectedError, 'returned an error');
+		t.deepEqual(err, enoent(err, filename), 'returned an error');
 		t.end();
 	});
 });

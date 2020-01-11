@@ -20,8 +20,9 @@
 	"license": "MIT",
 	"main": "index.js",
 	"scripts": {
-		"pretest": "npm run --silent lint",
-		"test": "npm run --silent tests-only",
+		"prepublish": "safe-publish-latest",
+		"pretest": "npm run lint",
+		"test": "npm run tests-only",
 		"tests-only": "node test",
 		"posttest": "npx aud",
 		"coverage": "covert test/index.js",
@@ -49,14 +50,15 @@
 		"safer-buffer": "^2.1.2"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^14.1.0",
+		"@ljharb/eslint-config": "^15.1.0",
 		"covert": "^1.1.1",
-		"eslint": "^6.4.0",
+		"eslint": "^6.8.0",
 		"evalmd": "^0.0.19",
 		"foreach": "^2.0.5",
 		"has": "^1.0.3",
 		"object-keys": "^1.1.1",
-		"tape": "^4.11.0"
+		"safe-publish-latest": "^1.1.4",
+		"tape": "^5.0.0-next.3"
 	},
 	"engines": {
 		"node": ">= 0.4"
