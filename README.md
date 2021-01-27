@@ -1,6 +1,5 @@
 #json-file-plus <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
-[![Build Status][travis-svg]][travis-url]
 [![dependency status][deps-svg]][deps-url]
 [![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
@@ -38,7 +37,7 @@ jsonFile(filename, function (err, file) {
 			baz: true
 		}
 	});
-	
+
 	file.remove('description'); // remove a specific key-value pair. returns a Promise
     	file.remove('description', callback); // remove a specific key-value pair. calls the errorback
 
@@ -60,16 +59,14 @@ jsonFile(filename, function (err, file) {
 Simply run `npm test` in the repo
 
 [npm-url]: https://npmjs.org/package/json-file-plus
-[npm-version-svg]: http://versionbadg.es/ljharb/json-file-plus.svg
-[travis-svg]: https://travis-ci.org/ljharb/json-file-plus.svg
-[travis-url]: https://travis-ci.org/ljharb/json-file-plus
+[npm-version-svg]: https://versionbadg.es/ljharb/json-file-plus.svg
 [deps-svg]: https://david-dm.org/ljharb/json-file-plus.svg
 [deps-url]: https://david-dm.org/ljharb/json-file-plus
 [dev-deps-svg]: https://david-dm.org/ljharb/json-file-plus/dev-status.svg
 [dev-deps-url]: https://david-dm.org/ljharb/json-file-plus#info=devDependencies
 [npm-badge-png]: https://nodei.co/npm/json-file-plus.png?downloads=true&stars=true
-[license-image]: http://img.shields.io/npm/l/json-file-plus.svg
+[license-image]: https://img.shields.io/npm/l/json-file-plus.svg
 [license-url]: LICENSE
-[downloads-image]: http://img.shields.io/npm/dm/json-file-plus.svg
-[downloads-url]: http://npm-stat.com/charts.html?package=json-file-plus
+[downloads-image]: https://img.shields.io/npm/dm/json-file-plus.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=json-file-plus
 
