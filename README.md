@@ -1,5 +1,7 @@
-#json-file-plus <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
+# json-file-plus <sup>[![Version Badge][npm-version-svg]][npm-url]</sup>
 
+[![github actions][actions-image]][actions-url]
+[![coverage][codecov-image]][codecov-url]
 [![dependency status][deps-svg]][deps-url]
 [![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
@@ -69,4 +71,7 @@ Simply run `npm test` in the repo
 [license-url]: LICENSE
 [downloads-image]: https://img.shields.io/npm/dm/json-file-plus.svg
 [downloads-url]: https://npm-stat.com/charts.html?package=json-file-plus
-
+[codecov-image]: https://codecov.io/gh/ljharb/json-file-plus/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/ljharb/json-file-plus/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/json-file-plus
+[actions-url]: https://github.com/ljharb/json-file-plus/actions
