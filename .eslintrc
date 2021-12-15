@@ -6,5 +6,5 @@
 	"rules": {
 		"func-name-matching": 1,
 		"no-magic-numbers": 0,
-	}
+	},
 }
