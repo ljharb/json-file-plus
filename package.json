@@ -45,7 +45,7 @@
 	"dependencies": {
 		"is": "^3.3.0",
 		"node.extend": "^2.0.2",
-		"object.assign": "^4.1.2",
+		"object.assign": "^4.1.4",
 		"promiseback": "^2.0.3",
 		"safer-buffer": "^2.1.2"
 	},
