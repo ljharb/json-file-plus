@@ -6,7 +6,7 @@ var jsonFile = require('../index');
 var forEach = require('for-each');
 var keys = require('object-keys');
 var Promise = require('promiseback').Deferred.Promise;
-var has = require('has');
+var hasOwn = require('hasown');
 var assign = require('object.assign');
 
 var noNewlineFilename = 'test/no-trailing-newline.json';
@@ -38,7 +38,7 @@ var enoent = function enoent(err, filename) {
 		errno: err.errno,
 		path: filename
 	});
-	if (has(err, 'syscall')) {
+	if (hasOwn(err, 'syscall')) {
 		expectedError.syscall = 'open';
 	}
 	return expectedError;
