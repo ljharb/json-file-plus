@@ -8,6 +8,7 @@ var keys = require('object-keys');
 var Promise = require('promiseback').Deferred.Promise;
 var hasOwn = require('hasown');
 var assign = require('object.assign');
+var v = require('es-value-fixtures');
 
 var noNewlineFilename = 'test/no-trailing-newline.json';
 var testFilename = 'test/test.json';
@@ -314,5 +315,17 @@ test('sync', function (t) {
 	t.deepEqual(file.data, testContents, 'sync file data is expected data');
 	t.equal(true, file instanceof jsonFile.JSONFile, 'file is JSONFile');
 	t.equal(true, file instanceof jsonFile.JSONData, 'file is JSONData');
+
+	t.end();
+});
+
+test('JSONData', function (t) {
+	forEach(v.primitives, function (primitive) {
+		if (typeof primitive !== 'undefined' && typeof primitive !== 'bigint' && typeof primitive !== 'symbol') {
+			var data = new jsonFile.JSONData(JSON.stringify(primitive));
+			t.notOk(data && 'data' in data, 'raw that parses to non-object (' + primitive + ') noops');
+		}
+	});
+
 	t.end();
 });
