@@ -18,21 +18,29 @@ const testContents = {
 	'true': true,
 };
 
-const NODE_011_NOT_FOUND = -2;
-const NODE_010_NOT_FOUND = 34;
-const WINDOWS_NODE_7_NOT_FOUND = -4058;
+/* eslint no-extra-parens: 0 */
+
+/** @typedef {Error & { errno: NODE_010_NOT_FOUND | NODE_011_NOT_FOUND | WINDOWS_NODE_7_NOT_FOUND }} FileNotFoundError */
+
+const NODE_011_NOT_FOUND = /** @type {const} */ (-2);
+const NODE_010_NOT_FOUND = /** @type {const} */ (34);
+const WINDOWS_NODE_7_NOT_FOUND = /** @type {const} */ (-4058);
+/** @type {(err: {}) => err is FileNotFoundError} */
 function isFileNotFoundError(err) {
-	return [
+	return 'errno' in err && typeof err.errno === 'number' && /** @type {const} */ ([
 		NODE_010_NOT_FOUND,
 		NODE_011_NOT_FOUND,
 		WINDOWS_NODE_7_NOT_FOUND,
-	].indexOf(err.errno) > -1;
+	// @ts-expect-error this is fine
+	]).indexOf(err.errno) > -1;
 }
 
+/** @type {(err: { message: string; errno: number, syscall?: string }, filename: string) => Error & { code: 'ENOENT'; errno: number; path: string; syscall?: 'open' }} */
 function enoent(err, filename) {
 	const message = 'ENOENT' + (err.message.indexOf('no such file or directory') === 8 ? ': no such file or directory' : '') + ', open \'' + filename + "'";
+	/** @type {Error & { code: 'ENOENT'; errno: number; path: string; syscall?: 'open' }} */
 	const expectedError = Object.assign(new Error(message), {
-		code: 'ENOENT',
+		code: /** @type {const} */ ('ENOENT'),
 		errno: err.errno,
 		path: filename,
 	});
@@ -55,8 +63,12 @@ test('returns an exception if the file is not found', async (t) => {
 		t.fail();
 	} catch (err) {
 		t.ok(err, 'error is truthy');
-		t.ok(isFileNotFoundError(err), 'error number is correct');
-		t.deepEqual(err, enoent(err, path.resolve('NOT A REAL FILE')), 'returns an error');
+		if (err) {
+			t.ok(isFileNotFoundError(err), 'error number is correct');
+			if (isFileNotFoundError(err)) {
+				t.deepEqual(err, enoent(err, path.resolve('NOT A REAL FILE')), 'returns an error');
+			}
+		}
 	}
 });
 
@@ -66,9 +78,11 @@ test('returns an exception if the file has invalid JSON', async (t) => {
 		t.fail();
 	} catch (err) {
 		t.ok(err instanceof SyntaxError, 'error is a SyntaxError');
-		t.equal(typeof err.message, 'string', 'err.message is a string');
-		const expected = /^Unexpected token ['i]/;
-		t.match(err.message, expected, 'gives the expected error');
+		if (err instanceof SyntaxError) {
+			t.equal(typeof err.message, 'string', 'err.message is a string');
+			const expected = /^Unexpected token ['i]/;
+			t.match(err.message, expected, 'gives the expected error');
+		}
 	}
 });
 
@@ -93,16 +107,18 @@ test('format', async (t) => {
 
 test('#get(): file.data', async (st) => {
 	const file = await jsonFile(testFilename);
+	/** @typedef {Omit<typeof file, 'data'> & { data: import('./test.json') }} TestData */
+
 	st.deepEqual(file.data, testContents, 'file.data matches expected');
 
 	const value = await file.get('obj');
-	st.notEqual(value, file.data.obj, 'get(key)->object is not the same reference');
+	st.notEqual(value, /** @type {TestData} */ (file).data.obj, 'get(key)->object is not the same reference');
 });
 
 test('#get(): with key', async (st) => {
 	const file = await jsonFile(testFilename);
 
-	return Promise.all(Object.entries(testContents).map(async ([key, keyContents]) => {
+	await Promise.all(Object.entries(testContents).map(async ([key, keyContents]) => {
 		const value = await file.get(key);
 		st.deepEqual(value, keyContents, 'data from get("' + key + '") matches');
 	}));
@@ -141,8 +157,9 @@ test('#remove()', (st) => {
 
 test('#set()', async (t) => {
 	const file = await jsonFile(testFilename);
+	/** @typedef {Omit<typeof file, 'data'> & { data: import('./test.json') & { foobar?: unknown } }} TestData */
 
-	t.equal(undefined, file.data.foobar, 'foo starts undefined');
+	t.equal(undefined, /** @type {TestData} */ (file).data.foobar, 'foo starts undefined');
 	const data = {
 		foobar: {
 			bar: 'baz',
@@ -150,8 +167,8 @@ test('#set()', async (t) => {
 		},
 	};
 	file.set(data);
-	t.deepEqual(file.data.foobar, data.foobar, 'expected data is set');
-	t.notEqual(file.data.foobar, data.foobar, 'data is not the same reference');
+	t.deepEqual(/** @type {TestData} */ (file).data.foobar, data.foobar, 'expected data is set');
+	t.notEqual(/** @type {TestData} */ (file).data.foobar, data.foobar, 'data is not the same reference');
 });
 
 test('#set(): setting invalid data', async (st) => {
@@ -159,11 +176,17 @@ test('#set(): setting invalid data', async (st) => {
 
 	const error = new TypeError('object must be a plain object');
 
+	// @ts-expect-error
 	st.throws(() => { file.set(null); }, error, 'throws when given non-object');
+	// @ts-expect-error
 	st.throws(() => { file.set(true); }, error, 'throws when given non-object');
+	// @ts-expect-error
 	st.throws(() => { file.set([]); }, error, 'throws when given non-object');
+	// @ts-expect-error
 	st.throws(() => { file.set(() => {}); }, error, 'throws when given non-object');
+	// @ts-expect-error
 	st.throws(() => { file.set('foo'); }, error, 'throws when given non-object');
+	// @ts-expect-error
 	st.throws(() => { file.set(/f/); }, error, 'throws when given non-object');
 });
 
@@ -174,8 +197,12 @@ test('returns an error when no file', async (t) => {
 		t.fail();
 	} catch (err) {
 		t.ok(err, 'error is truthy');
-		t.ok(isFileNotFoundError(err), 'error number is correct');
-		t.deepEqual(err, enoent(err, filename), 'returned an error');
+		if (err) {
+			t.ok(isFileNotFoundError(err), 'error number is correct');
+			if (isFileNotFoundError(err)) {
+				t.deepEqual(err, enoent(err, filename), 'returned an error');
+			}
+		}
 	}
 });
 
@@ -232,7 +259,7 @@ test('sync', (t) => {
 test('JSONData', (t) => {
 	v.primitives.forEach(function (primitive) {
 		if (typeof primitive !== 'undefined' && typeof primitive !== 'bigint' && typeof primitive !== 'symbol') {
-			var data = new jsonFile.JSONData(JSON.stringify(primitive));
+			var data = new JSONData(JSON.stringify(primitive));
 			t.notOk(data && 'data' in data, 'raw that parses to non-object (' + primitive + ') noops');
 		}
 	});
