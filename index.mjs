@@ -3,12 +3,14 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import extend from 'node.extend';
 
+/** @type {(key: unknown) => key is number | string} */
 function checkKey(key) {
 	if ((typeof key !== 'number' || !isFinite(key)) && (typeof key !== 'string' || key.length === 0)) {
 		throw new TypeError('key must be a finite number or a nonempty string');
 	}
 }
 
+/** @type {(value: unknown) => value is Object} */
 function isPlainObject(value) {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
 		return false;
@@ -17,6 +19,7 @@ function isPlainObject(value) {
 	return proto === Object.prototype || proto === null;
 }
 
+/** @type {import('.').JSONData} */
 export class JSONData {
 	format;
 
@@ -68,6 +71,7 @@ export class JSONData {
 	}
 }
 
+/** @type {import('.').JSONFile} */
 export class JSONFile extends JSONData {
 	#filename;
 
@@ -102,12 +106,14 @@ export class JSONFile extends JSONData {
 	}
 }
 
+/** @type {import('.').sync} */
 export function sync(filename) {
 	const raw = readFileSync(filename, 'utf8');
 
 	return new JSONFile(filename, raw);
 }
 
+/** @type {import('.').default} */
 export default async function readJSON(filename) {
 	const raw = await readFile(resolve(filename), { encoding: 'utf8' });
 
