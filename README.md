@@ -13,22 +13,16 @@ A module to read from and write to JSON files, without losing formatting, to min
 
 ## Example
 ```js
-var jsonFile = require('json-file-plus');
-var path = require('path'); // in node-core
-var filename = path.join(process.cwd(), 'package.json');
-var callback = function (err, result) { /* your code here */ };
+const jsonFile = require('json-file-plus');
+const path = require('path');
+const filename = path.join(process.cwd(), 'package.json');
 
-/* Note: jsonFile also returns a Promise, if you prefer that to a Node-style callback ("errorback"). */
-jsonFile(filename, function (err, file) {
-	if (err) { return doSomethingWithError(err); }
-
+jsonFile(filename).then((file) => {
 	file.data; // Direct access to the data from the file
 	file.format; // extracted formatting data. change at will.
 
 	file.get('version'); // get top-level keys. returns a Promise
-	file.get('version', callback); // get top-level keys. calls the errorback
 	file.get(); // get entire data. returns a Promise
-	file.get(callback); // get entire data. calls the errorback
 
 	/* pass any plain object into "set" to merge in a deep copy */
 	/* please note: references will be broken. */
@@ -36,20 +30,17 @@ jsonFile(filename, function (err, file) {
 	file.set({
 		foo: 'bar',
 		bar: {
-			baz: true
-		}
+			baz: true,
+		},
 	});
 
 	file.remove('description'); // remove a specific key-value pair. returns a Promise
-    	file.remove('description', callback); // remove a specific key-value pair. calls the errorback
 
 	/* change the filename if desired */
 	file.filename = path.join(process.cwd(), 'new-package.json');
 
-	/* Save the file, preserving formatting. */
-	/* Errorback will be passed to fs.writeFile */
-	/* Returns a Promise. */
-	file.save(callback).then(function () {
+	/* Save the file, preserving formatting. returns a Promise. */
+	file.save().then(function () {
 		console.log('success!');
 	}).catch(function (err) {
 		console.log('error!', err);

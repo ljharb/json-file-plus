@@ -9,7 +9,7 @@ jobs:
   tests:
     uses: ljharb/actions/.github/workflows/node.yml@main
     with:
-      range: '>= 10 < 20'
+      range: '^16.20.2 || ^18.20.6'
       type: minors
       command: npm run tests-only
 
