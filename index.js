@@ -25,7 +25,10 @@ var JSONData = function JSONData(raw) {
 		trailing: hasTrailingNewline
 	};
 	if (raw) {
-		this.data = JSON.parse(raw);
+		var result = JSON.parse(raw);
+		if (result && Object(result) === result) {
+			this.data = result;
+		}
 	}
 };
 
