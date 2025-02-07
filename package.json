@@ -69,7 +69,14 @@
 	},
 	"publishConfig": {
 		"ignore": [
-			".github/workflows"
+			".attw.json",
+			".editorconfig",
+			".eslintrc",
+			".nycrc",
+			".github/workflows",
+			"appveyor.yml",
+			"test",
+			"tsconfig.json"
 		]
 	}
 }
