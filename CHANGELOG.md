@@ -1,3 +1,13 @@
+[4.0.0](https://github.com/ljharb/json-file-plus/releases/tag/v4.0.0) / 2025-02-13
+==================
+[Breaking] complete overhaul; use ESM and modern syntax
+[New] add types
+[Fix] ensure non-object data is not persisted
+[meta] add `sideEffects` flag
+[meta] exclude more files
+[meta] add `npmignore`
+[actions] split out node 10-20, and 20+
+
 [3.3.2](https://github.com/ljharb/json-file-plus/releases/tag/v3.3.2) / 2025-02-06
 ==================
 [Deps] update `node.extend`, `object.assign`, `promiseback`, `is`, `node.extend`, `safer-buffer`
