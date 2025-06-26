@@ -51,9 +51,9 @@
 		"node.extend": "^2.0.3"
 	},
 	"devDependencies": {
-		"@arethetypeswrong/cli": "^0.17.3",
-		"@ljharb/eslint-config": "^21.1.1",
-		"@ljharb/tsconfig": "^0.2.3",
+		"@arethetypeswrong/cli": "^0.18.2",
+		"@ljharb/eslint-config": "^21.2.0",
+		"@ljharb/tsconfig": "^0.3.2",
 		"@types/tape": "^5.8.1",
 		"es-value-fixtures": "^1.7.1",
 		"eslint": "=8.8.0",
