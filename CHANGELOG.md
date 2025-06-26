@@ -1,32 +1,32 @@
 [4.0.0](https://github.com/ljharb/json-file-plus/releases/tag/v4.0.0) / 2025-02-13
 ==================
-[Breaking] complete overhaul; use ESM and modern syntax
-[New] add types
-[Fix] ensure non-object data is not persisted
-[meta] add `sideEffects` flag
-[meta] exclude more files
-[meta] add `npmignore`
-[actions] split out node 10-20, and 20+
+  * [Breaking] complete overhaul; use ESM and modern syntax
+  * [New] add types
+  * [Fix] ensure non-object data is not persisted
+  * [meta] add `sideEffects` flag
+  * [meta] exclude more files
+  * [meta] add `npmignore`
+  * [actions] split out node 10-20, and 20+
 
 [3.3.2](https://github.com/ljharb/json-file-plus/releases/tag/v3.3.2) / 2025-02-06
 ==================
-[Deps] update `node.extend`, `object.assign`, `promiseback`, `is`, `node.extend`, `safer-buffer`
-[readme] add actions and codecov badges
-[readme] remove travis badge
-[meta] do not publish workflow files
-[meta] remove audit-level
-[meta] gitignore coverage output
-[meta] use `prepublishOnly` script for npm 7+
-[meta] add `funding` field
-[meta] add FUNDING.yml
-[Dev Deps] use `hasown` instead of `has`
-[Dev Deps] update `eslint`, `@ljharb/eslint-config`, `aud`, `evalmd`, `for-each`, `object-keys`, `tape`; add `safe-publish-latest`
-[actions] reuse common workflows
-[Tests] replace `nsp`/`aud` with `npm audit`
-[Tests] use `for-each` instead of `foreach`
-[Tests] migrate tests to Github Actions
-[Tests] run `nyc` on all tests; use `tape` runner
-[Tests] use shared travis-ci configs
+  * [Deps] update `node.extend`, `object.assign`, `promiseback`, `is`, `node.extend`, `safer-buffer`
+  * [readme] add actions and codecov badges
+  * [readme] remove travis badge
+  * [meta] do not publish workflow files
+  * [meta] remove audit-level
+  * [meta] gitignore coverage output
+  * [meta] use `prepublishOnly` script for npm 7+
+  * [meta] add `funding` field
+  * [meta] add FUNDING.yml
+  * [Dev Deps] use `hasown` instead of `has`
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `aud`, `evalmd`, `for-each`, `object-keys`, `tape`; add `safe-publish-latest`
+  * [actions] reuse common workflows
+  * [Tests] replace `nsp`/`aud` with `npm audit`
+  * [Tests] use `for-each` instead of `foreach`
+  * [Tests] migrate tests to Github Actions
+  * [Tests] run `nyc` on all tests; use `tape` runner
+  * [Tests] use shared travis-ci configs
 
 [3.3.1](https://github.com/ljharb/json-file-plus/releases/tag/v3.3.1) / 2018-03-20
 ==================
