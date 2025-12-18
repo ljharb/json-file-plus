@@ -15,7 +15,7 @@ function isPlainObject(value) {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
 		return false;
 	}
-	var proto = Object.getPrototypeOf(value);
+	const proto = Object.getPrototypeOf(value);
 	return proto === Object.prototype || proto === null;
 }
 
@@ -29,7 +29,7 @@ export class JSONData {
 		const indent = (indentMatch && indentMatch[0]) || 2;
 
 		if (raw) {
-			var result = JSON.parse(raw);
+			const result = JSON.parse(raw);
 			if (result && Object(result) === result) {
 				this.data = result;
 			}

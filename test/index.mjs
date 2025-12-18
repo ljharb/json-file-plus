@@ -11,11 +11,11 @@ const noNewlineFilename = 'test/no-trailing-newline.json';
 const testFilename = 'test/test.json';
 const testContents = {
 	arr: [1, 2, 3],
-	'false': false,
+	false: false,
 	foo: 'bar',
-	'null': null,
+	null: null,
 	obj: { nested: {} },
-	'true': true,
+	true: true,
 };
 
 /* eslint no-extra-parens: 0 */
@@ -37,7 +37,7 @@ function isFileNotFoundError(err) {
 
 /** @type {(err: { message: string; errno: number, syscall?: string }, filename: string) => Error & { code: 'ENOENT'; errno: number; path: string; syscall?: 'open' }} */
 function enoent(err, filename) {
-	const message = 'ENOENT' + (err.message.indexOf('no such file or directory') === 8 ? ': no such file or directory' : '') + ', open \'' + filename + "'";
+	const message = `ENOENT${err.message.indexOf('no such file or directory') === 8 ? ': no such file or directory' : ''}, open '${filename}'`;
 	/** @type {Error & { code: 'ENOENT'; errno: number; path: string; syscall?: 'open' }} */
 	const expectedError = Object.assign(new Error(message), {
 		code: /** @type {const} */ ('ENOENT'),
@@ -120,7 +120,7 @@ test('#get(): with key', async (st) => {
 
 	await Promise.all(Object.entries(testContents).map(async ([key, keyContents]) => {
 		const value = await file.get(key);
-		st.deepEqual(value, keyContents, 'data from get("' + key + '") matches');
+		st.deepEqual(value, keyContents, `data from get("${key}") matches`);
 	}));
 });
 
@@ -209,13 +209,13 @@ test('returns an error when no file', async (t) => {
 test('remembers filename', async (t) => {
 	const file = await jsonFile(testFilename);
 
-	t.equal(file.filename, testFilename, 'filename equals ' + testFilename);
+	t.equal(file.filename, testFilename, `filename equals ${testFilename}`);
 });
 
 test('saves properly', async (t) => {
 	const file = await jsonFile(testFilename);
 
-	t.equal(file.filename, testFilename, 'filename equals ' + testFilename);
+	t.equal(file.filename, testFilename, `filename equals ${testFilename}`);
 	file.set({ foo: !testContents.foo });
 
 	await file.save();
@@ -257,10 +257,10 @@ test('sync', (t) => {
 });
 
 test('JSONData', (t) => {
-	v.primitives.forEach(function (primitive) {
+	v.primitives.forEach((primitive) => {
 		if (typeof primitive !== 'undefined' && typeof primitive !== 'bigint' && typeof primitive !== 'symbol') {
-			var data = new JSONData(JSON.stringify(primitive));
-			t.notOk(data && 'data' in data, 'raw that parses to non-object (' + primitive + ') noops');
+			const data = new JSONData(JSON.stringify(primitive));
+			t.notOk(data && 'data' in data, `raw that parses to non-object (${primitive}) noops`);
 		}
 	});
 
