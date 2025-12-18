@@ -1,3 +1,13 @@
+[4.0.1](https://github.com/ljharb/json-file-plus/releases/tag/v4.0.1) / 2025-12-17
+==================
+ * [Fix] make `filename` writable
+ * [types] allow JSONData types to be generic
+ * [meta] update TS moduleResolution config
+ * [meta] fix changelog formatting
+ * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `npmignore`
+ * [Dev Deps] update `@arethetypeswrong/cli`, `@ljharb/eslint-config`, `@ljharb/tsconfig`
+ * [Tests] switch from nyc to c8
+
 [4.0.0](https://github.com/ljharb/json-file-plus/releases/tag/v4.0.0) / 2025-02-13
 ==================
   * [Breaking] complete overhaul; use ESM and modern syntax
