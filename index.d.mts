@@ -2,7 +2,7 @@
 export type JSONKey = string | number;
 export type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
-export class JSONData {
+export class JSONData<K extends JSONKey, V extends JSONValue> {
 	constructor(raw: string);
 
 	format: {
@@ -10,18 +10,18 @@ export class JSONData {
 		trailing: boolean;
 	};
 
-	data: Exclude<JSONValue, string | number | boolean | null>;
+	data: Exclude<V, string | number | boolean | null>;
 
-	get(key?: JSONKey): Promise<JSONValue>;
+	get(key?: K): Promise<V>;
 
-	set(obj: Record<JSONKey, JSONValue>): void;
+	set(obj: Record<K, V>): void;
 
-	remove(key: JSONKey): void;
+	remove(key: K): void;
 
 	stringify(): string;
 }
 
-export class JSONFile<T extends string = string> extends JSONData {
+export class JSONFile<T extends string = string, K extends JSONKey = JSONKey, V extends JSONValue = JSONValue> extends JSONData<K, V> {
 	constructor(filename: T, raw: string);
 
 	filename: T;

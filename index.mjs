@@ -10,7 +10,7 @@ function checkKey(key) {
 	}
 }
 
-/** @type {(value: unknown) => value is Object} */
+/** @type {(value: unknown) => value is object} */
 function isPlainObject(value) {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
 		return false;
