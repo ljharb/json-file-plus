@@ -73,18 +73,16 @@ export class JSONData {
 
 /** @type {import('.').JSONFile} */
 export class JSONFile extends JSONData {
-	#filename;
-
 	filename;
 
 	constructor(filename, raw) {
 		super(raw);
 
-		this.#filename = filename;
+		this.filename = filename;
 		Object.defineProperty(this, 'filename', {
 			configurable: false,
 			value: filename,
-			writable: false,
+			writable: true,
 		});
 
 		const { format } = this;
@@ -92,17 +90,12 @@ export class JSONFile extends JSONData {
 		this.format = format;
 	}
 
-	// eslint-disable-next-line no-dupe-class-members -- this is so the function can be borrowed if needed
-	get filename() {
-		return this.#filename;
-	}
-
 	async save() {
-		return writeFile(this.#filename, this.stringify());
+		return writeFile(this.filename, this.stringify());
 	}
 
 	saveSync() {
-		writeFileSync(this.#filename, this.stringify());
+		writeFileSync(this.filename, this.stringify());
 	}
 }
 

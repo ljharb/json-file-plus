@@ -15,7 +15,12 @@ A module to read from and write to JSON files, without losing formatting, to min
 ```js
 const jsonFile = require('json-file-plus');
 const path = require('path');
+const fs = require('fs');
+const assert = require('assert');
+
 const filename = path.join(process.cwd(), 'package.json');
+
+const originalContents = String(fs.readFileSync(filename));
 
 jsonFile(filename).then((file) => {
 	file.data; // Direct access to the data from the file
@@ -40,10 +45,16 @@ jsonFile(filename).then((file) => {
 	file.filename = path.join(process.cwd(), 'new-package.json');
 
 	/* Save the file, preserving formatting. returns a Promise. */
-	file.save().then(function () {
+	file.save().then(() => {
 		console.log('success!');
-	}).catch(function (err) {
+
+		const finalContents = String(fs.readFileSync(filename));
+		assert.equal(originalContents, finalContents);
+	}).catch((err) => {
 		console.log('error!', err);
+		process.exitCode = 1;
+	}).finally(() => {
+		fs.writeFileSync(filename, originalContents, { encoding: 'utf8' });
 	});
 });
 ```
