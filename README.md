@@ -75,5 +75,5 @@ Simply run `npm test` in the repo
 [downloads-url]: https://npm-stat.com/charts.html?package=json-file-plus
 [codecov-image]: https://codecov.io/gh/ljharb/json-file-plus/branch/main/graphs/badge.svg
 [codecov-url]: https://app.codecov.io/gh/ljharb/json-file-plus/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/json-file-plus
+[actions-image]: https://img.shields.io/github/check-runs/ljharb/json-file-plus/main
 [actions-url]: https://github.com/ljharb/json-file-plus/actions
