@@ -142,6 +142,12 @@ test('#remove()', (st) => {
 		s2t.equal('arr' in file.data, false, 'key removed from data');
 	});
 
+	st.test('with a numeric key', async (s2t) => {
+		const data = new JSONData(JSON.stringify({ 0: 'zero', 1: 'one' }));
+		data.remove(0);
+		s2t.equal(0 in data.data, false, 'numeric key removed from data');
+	});
+
 	st.test('with an empty key', async (s2t) => {
 		const file = await jsonFile(testFilename);
 		try {
@@ -150,6 +156,23 @@ test('#remove()', (st) => {
 		} catch (err) {
 			s2t.equal(err instanceof TypeError, true, 'err is TypeError');
 		}
+	});
+
+	st.test('with invalid key types', (s2t) => {
+		const data = new JSONData(JSON.stringify({ a: 1 }));
+		const error = new TypeError('key must be a finite number or a nonempty string');
+
+		// @ts-expect-error
+		s2t.throws(() => { data.remove(null); }, error, 'throws for null');
+		// @ts-expect-error
+		s2t.throws(() => { data.remove(undefined); }, error, 'throws for undefined');
+		// @ts-expect-error
+		s2t.throws(() => { data.remove(true); }, error, 'throws for boolean');
+		s2t.throws(() => { data.remove(NaN); }, error, 'throws for NaN');
+		s2t.throws(() => { data.remove(Infinity); }, error, 'throws for Infinity');
+		s2t.throws(() => { data.remove(-Infinity); }, error, 'throws for -Infinity');
+
+		s2t.end();
 	});
 
 	st.end();
@@ -169,6 +192,16 @@ test('#set()', async (t) => {
 	file.set(data);
 	t.deepEqual(/** @type {TestData} */ (file).data.foobar, data.foobar, 'expected data is set');
 	t.notEqual(/** @type {TestData} */ (file).data.foobar, data.foobar, 'data is not the same reference');
+});
+
+test('#set(): with null-prototype object', async (t) => {
+	const file = await jsonFile(testFilename);
+
+	const obj = Object.create(null);
+	obj.baz = 'quux';
+	file.set(obj);
+	const value = await file.get('baz');
+	t.equal(value, 'quux', 'null-prototype object is accepted');
 });
 
 test('#set(): setting invalid data', async (st) => {
@@ -264,5 +297,31 @@ test('JSONData', (t) => {
 		}
 	});
 
+	t.test('with empty raw', (st) => {
+		const data = new JSONData('');
+		st.notOk('data' in data, 'empty raw does not set data');
+		st.equal(data.format.indent, 2, 'indent defaults to 2');
+		st.equal(data.format.trailing, false, 'trailing is false');
+
+		st.end();
+	});
+
 	t.end();
+});
+
+test('#stringify()', async (t) => {
+	t.test('with trailing newline', async (st) => {
+		const file = await jsonFile(testFilename);
+		const str = file.stringify();
+
+		st.ok(str.endsWith('\n\n'), 'ends with double newline when trailing is true');
+	});
+
+	t.test('without trailing newline', async (st) => {
+		const file = await jsonFile(noNewlineFilename);
+		const str = file.stringify();
+
+		st.ok(str.endsWith('\n'), 'ends with single newline when trailing is false');
+		st.notOk(str.endsWith('\n\n'), 'does not end with double newline');
+	});
 });
